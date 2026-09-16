@@ -1,0 +1,343 @@
+---
+title: Project Structure
+description: Every file and folder a React Native 0.87 init generates, what each one is for, and which ones you will actually edit.
+status: current
+toolchain: cli
+---
+
+A freshly generated React Native project has about a dozen top-level files and two large native
+folders. Most tutorials skip straight past them, which is why so many people are unsure whether
+they are allowed to edit `android/` (you are), whether `index.js` matters (it does), or why there
+are three different config files that all seem to be about bundling.
+
+This page walks the tree a 0.87 `init` actually produces and says, for each entry, what it is for
+and how often you will touch it.
+
+## The generated tree
+
+```text title=AwesomeProject/
+AwesomeProject/
+├── .bundle/                 Bundler config, so `bundle install` finds the right gem path
+├── __tests__/               Jest tests; App.test.tsx is generated for you
+├── android/                 The complete Android project. Yours to edit.
+├── ios/                     The complete Xcode project. Yours to edit.
+├── .eslintrc.js             ESLint, extending @react-native/eslint-config
+├── .gitignore               Build output, node_modules, Pods, Xcode user state
+├── .prettierrc.js           Prettier formatting rules
+├── .watchmanconfig          Marks the project root for Watchman
+├── App.tsx                  The root React component
+├── Gemfile                  Pins CocoaPods and its dependencies (iOS)
+├── README.md
+├── app.json                 The app's registered name and display name
+├── babel.config.js          Babel presets — module:@react-native/babel-preset
+├── index.js                 The real entry point; registers App with AppRegistry
+├── jest.config.js           Jest preset: react-native
+├── metro.config.js          Metro bundler configuration
+├── package.json             Dependencies and the npm scripts you run
+└── tsconfig.json            Extends @react-native/typescript-config
+```
+
+> [!NOTE] `.bundle`, `.gitignore`, `.watchmanconfig` and the dotfiles
+> In the template repository these are stored as `_bundle`, `_gitignore` and `_watchmanconfig`,
+> because npm strips a real `.gitignore` from a published package. The CLI renames them during
+> `init`. If you are reading the template source and wondering where the dotfiles went, that is why.
+
+## The files you will edit constantly
+
+### `App.tsx`
+
+The root component, and the only application code the template ships. It renders a starter screen
+whose entire purpose is to prove the toolchain works. Delete its contents and replace them the
+moment you have a real first screen — nothing else depends on what is inside it.
+
+```tsx title=App.tsx
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.screen}>
+      <Text style={styles.title}>Awesome Project</Text>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  screen: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  title: {fontSize: 24, fontWeight: '600'},
+});
+```
+
+The file is `.tsx` because the template is TypeScript by default in 0.87. There is no separate
+"TypeScript template" to opt into any more.
+
+### `package.json`
+
+Dependencies plus the scripts you run every day:
+
+```json title=package.json (scripts)
+{
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "lint": "eslint .",
+    "start": "react-native start",
+    "test": "jest"
+  }
+}
+```
+
+`npm start` runs Metro. `npm run android` and `npm run ios` build and install. These scripts call
+the **project-local** CLI, which is exactly why a global CLI install causes so much confusion —
+the scripts and your muscle memory end up running different binaries.
+
+### `android/` and `ios/`
+
+Two complete native projects, checked into your repository, owned by you. This is the defining
+property of the Community CLI path: there is no managed layer regenerating them, so nothing stops
+you editing them, and nothing regenerates them if you break them.
+
+The files you will realistically open:
+
+| File | What you change there |
+| --- | --- |
+| `android/app/build.gradle` | App ID, version code/name, signing configs, build variants |
+| `android/build.gradle` | Repositories and Gradle-level plugin versions |
+| `android/gradle.properties` | JVM memory, the AGP 9 opt-outs, project-wide flags |
+| `android/app/src/main/AndroidManifest.xml` | Permissions, intent filters, deep link schemes |
+| `ios/Podfile` | Pod sources and per-target native configuration |
+| `ios/<App>/Info.plist` | Permission usage strings, URL schemes, App Transport Security |
+| `ios/<App>.xcodeproj` | Signing team, capabilities, build settings (through Xcode) |
+
+Everything else in those folders is generated or boilerplate you can leave alone until a specific
+need arises.
+
+> [!WARNING] `ios/Pods/` and `ios/build/` are not yours
+> `Pods/` is regenerated by `pod install` and `build/` by Xcode. Both are in `.gitignore`.
+> Editing a file inside `Pods/` fixes your machine and nobody else's, and your change disappears
+> at the next `pod install`. `Podfile.lock` **is** yours — commit it.
+
+## The files you edit rarely, but must understand
+
+### `index.js`
+
+The true entry point. React Native's native side asks `AppRegistry` for a component registered
+under a name, and this is where that registration happens.
+
+```js title=index.js
+/**
+ * @format
+ */
+
+import {AppRegistry} from 'react-native';
+import App from './App';
+import {name as appName} from './app.json';
+
+AppRegistry.registerComponent(appName, () => App);
+```
+
+The `appName` string must match the name the native code asks for — `MainActivity` on Android and
+the app delegate on iOS both reference it. Change it in `app.json` and the native side stops
+finding your app, with a runtime error rather than a build error.
+
+This file stays `.js` rather than `.ts` in the template. You can convert it, but there is almost
+nothing in it to type.
+
+### `app.json`
+
+```json title=app.json
+{
+  "name": "AwesomeProject",
+  "displayName": "AwesomeProject"
+}
+```
+
+`name` is the `AppRegistry` key described above. `displayName` is the label under the icon on the
+home screen. Changing `displayName` alone is safe; changing `name` means changing the native
+references too.
+
+### `metro.config.js`
+
+Metro is the bundler. The generated config merges your overrides into React Native's defaults:
+
+```js title=metro.config.js
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+
+/**
+ * Metro configuration
+ * https://reactnative.dev/docs/metro
+ *
+ * @type {import('@react-native/metro-config').MetroConfig}
+ */
+const config = {};
+
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+```
+
+You will edit this when you add SVG transforms, monorepo watch folders, or extra asset
+extensions — and rarely otherwise. Always merge into `getDefaultConfig()` rather than writing a
+config from scratch; the defaults carry the resolver and transformer settings React Native needs.
+
+#### Metro 0.87: TypeScript configs are stable, YAML is gone
+
+React Native 0.87 ships Metro 0.87, which brings three changes worth knowing:
+
+- **`metro.config.mts` is supported**, as a stable TypeScript/ESM config file. If you prefer a
+  typed config, rename the file and export a default.
+- **YAML config files were dropped.** A `metro.config.yaml` from an older project is no longer
+  read at all — and it fails silently, as an absent config rather than an error.
+- **`.es6` file extensions were dropped** from the default resolver. If a dependency ships `.es6`
+  files, Metro will not resolve them.
+
+```ts-fragment title=metro.config.mts
+import {getDefaultConfig, mergeConfig} from '@react-native/metro-config';
+
+const config = {};
+
+export default mergeConfig(getDefaultConfig(import.meta.dirname), config);
+```
+
+Metro 0.87 also generates source maps roughly twice as fast and uses about half the memory of the
+previous release, which is most noticeable on large projects and in CI.
+
+### `babel.config.js`
+
+```js title=babel.config.js
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],
+};
+```
+
+You edit this to add a plugin — most commonly `react-native-worklets/plugin` when you add
+Reanimated 4, or `babel-plugin-module-resolver` for path aliases. Plugin order matters, and
+worklets-style plugins generally have to be last.
+
+> [!WARNING] Changing Babel config needs a cache reset
+> Metro caches transformed modules. After editing `babel.config.js` the old output is still cached
+> and your change appears to do nothing. Restart Metro with `npm start -- --reset-cache`.
+
+### `tsconfig.json`
+
+```json title=tsconfig.json
+{
+  "extends": "@react-native/typescript-config",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "**/Pods"]
+}
+```
+
+Three lines, and the important part is what is **not** there. In 0.87 the Strict TypeScript API is
+the default, enforced by the `exports` map inside the `react-native` package itself. Adding a
+`customConditions` array with `react-native-legacy-deep-imports` turns it back off — that hatch
+exists only through 0.88 and is a migration aid, not a setting to adopt. See
+[Migrating to the Strict TypeScript API](../migration/strict-typescript-api.md).
+
+Add your own `paths`, `baseUrl` or stricter flags here. Keep the `extends`.
+
+### `jest.config.js`
+
+```js title=jest.config.js
+module.exports = {
+  preset: 'react-native',
+};
+```
+
+The preset supplies the transform, the module mapper for assets, and the React Native
+environment. You will extend it with `setupFilesAfterEach`, `transformIgnorePatterns` for native
+packages that ship untranspiled ESM, and coverage settings. See [Jest Setup](../testing/jest-setup.md).
+
+### `Gemfile` and `.bundle/`
+
+```ruby title=Gemfile
+source 'https://rubygems.org'
+
+ruby '>= 2.6.10'
+
+gem 'cocoapods', '>= 1.13', '!= 1.15.0', '!= 1.15.1'
+gem 'activesupport', '>= 6.1.7.5', '!= 7.1.0'
+```
+
+The `Gemfile` pins CocoaPods and the gems it needs, excluding known-broken releases. `.bundle/`
+holds the Bundler configuration so gems install into the project rather than system-wide. Both are
+iOS-only and both should be committed, along with `Gemfile.lock`.
+
+This is why the iOS install command is `bundle install && bundle exec pod install` rather than
+`pod install`: `bundle exec` runs the pinned CocoaPods rather than whatever is installed globally.
+
+> [!NOTE] Swift Package Manager is Experimental and would remove these
+> 0.87 ships an opt-in Swift Package Manager path that needs no Ruby, Bundler or CocoaPods.
+> CocoaPods remains the default and the SPM commands may still change. See
+> [CocoaPods to Swift Package Manager](../migration/cocoapods-to-spm.md).
+
+### `.watchmanconfig`
+
+An empty JSON object that marks the directory as a Watchman project root. You will never edit it.
+It matters only if you delete it, at which point Watchman may watch a parent directory — for
+example your entire home folder — and file watching becomes very slow.
+
+### `.eslintrc.js` and `.prettierrc.js`
+
+Lint and format configuration, extending `@react-native/eslint-config`. Edit freely; neither
+affects the build.
+
+### `__tests__/App.test.tsx`
+
+A single generated smoke test that renders `App`. It exists so `npm test` does something on day
+one. Keep it — a test that renders the root component catches a surprising share of provider and
+import mistakes.
+
+## Where your own code goes
+
+The template deliberately does not create a `src/` directory, because it has no opinion about your
+architecture. A structure that holds up well:
+
+```text title=A conventional layout
+AwesomeProject/
+├── App.tsx                  Providers and the navigation container only
+├── src/
+│   ├── screens/             One file per screen
+│   ├── components/          Shared presentational components
+│   ├── navigation/          Navigators and route type definitions
+│   ├── api/                 Network clients and request/response types
+│   ├── hooks/
+│   ├── store/
+│   └── theme/               Colours, spacing, typography tokens
+└── ...
+```
+
+If you add `src/`, add a `paths` entry in `tsconfig.json` and a matching resolver alias so imports
+do not become `../../../`. Metro and TypeScript need to be told separately — TypeScript alone gets
+you clean editor navigation and a runtime module-not-found error.
+
+## Common mistakes
+
+- **Treating `android/` and `ios/` as generated output.** They are source. They are committed,
+  they are yours, and nothing will regenerate them. Wrong: deleting `ios/` to "fix" a build.
+  Right: `cd ios && bundle exec pod install`, or clearing derived data.
+- **Editing files under `ios/Pods/`.** They are regenerated by `pod install`. Configure the pod
+  from the `Podfile` instead.
+- **Changing `name` in `app.json` and only that.** `AppRegistry.registerComponent` uses it, and so
+  does the native code on both platforms. The app builds and then fails at launch.
+- **Writing `metro.config.js` from scratch.** Wrong: `module.exports = {resolver: {...}}`. Right:
+  `mergeConfig(getDefaultConfig(__dirname), config)`. Without the defaults, asset resolution and
+  the React Native transformer are missing.
+- **Carrying a `metro.config.yaml` forward.** Metro 0.87 dropped YAML configs. The file is ignored
+  and you get default behaviour with no warning.
+- **Expecting `.es6` files to resolve.** That extension was dropped from Metro's defaults in 0.87.
+- **Editing `babel.config.js` without resetting the cache.** Metro serves the cached transform.
+  Run `npm start -- --reset-cache`.
+- **Adding `customConditions` to `tsconfig.json` to silence deep-import errors.** That re-enables
+  the legacy type surface, works only through 0.88, and leaves you with more to migrate later.
+  Fix the imports instead.
+- **Not committing `Podfile.lock` or `Gemfile.lock`.** Without them, two developers resolve
+  different CocoaPods and pod versions and get different builds from the same commit.
+
+## Related topics
+
+- [Creating a Project](creating-a-project.md) — the `init` command that produced this tree.
+- [Environment Setup](environment-setup.md) — the toolchain these files expect.
+- [Your First Screen](your-first-screen.md) — replacing the template `App.tsx`.
+- [Running on Android](running-on-android.md) — what Gradle does with `android/`.
+- [Running on iOS](running-on-ios.md) — what CocoaPods does with `ios/`.
+- [Migrating to the Strict TypeScript API](../migration/strict-typescript-api.md) — the `tsconfig.json` detail.
+- [Jest Setup](../testing/jest-setup.md) — extending `jest.config.js`.
+- [Autolinking and react-native.config.js](../native-modules/autolinking.md) — how native dependencies reach the native projects.

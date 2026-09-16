@@ -1,0 +1,17 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "strict": true,
+    "types": [],
+    "isolatedModules": false
+  },
+  "include": [
+    "blocks"
+  ]
+}

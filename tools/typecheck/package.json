@@ -1,0 +1,37 @@
+{
+  "name": "rn-docs-typecheck",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Installs real react-native 0.87.1 types so every fenced ts/tsx block in content/ can be type-checked with the Strict TypeScript API active.",
+  "dependencies": {
+    "react": "19.2.3",
+    "react-native": "0.87.1"
+  },
+  "devDependencies": {
+    "@react-native-async-storage/async-storage": "^3.1.1",
+    "@react-native-community/netinfo": "^12.0.1",
+    "@react-native/typescript-config": "0.87.1",
+    "@react-navigation/bottom-tabs": "^7.18.18",
+    "@react-navigation/drawer": "^7.13.10",
+    "@react-navigation/elements": "^2.9.40",
+    "@react-navigation/native": "^7.3.18",
+    "@react-navigation/native-stack": "^7.18.10",
+    "@shopify/flash-list": "^2.3.2",
+    "@tanstack/react-query": "^5.102.8",
+    "@types/react": "19.1.1",
+    "react-native-config": "^1.7.2",
+    "react-native-gesture-handler": "^3.3.0",
+    "react-native-keychain": "^10.0.0",
+    "react-native-mmkv": "^4.3.2",
+    "react-native-nitro-modules": "^0.37.1",
+    "react-native-permissions": "^5.6.1",
+    "react-native-reanimated": "^4.6.0",
+    "react-native-safe-area-context": "^5.9.1",
+    "react-native-screens": "^4.27.0",
+    "react-native-svg": "^15.15.5",
+    "react-native-webview": "^14.0.1",
+    "react-native-worklets": "^0.12.2",
+    "typescript": "5.9.3",
+    "zustand": "^5.0.15"
+  }
+}

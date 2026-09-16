@@ -1,0 +1,64 @@
+// Gradle build for the Android side of the library.
+//
+// No `buildscript {}` block on purpose. An autolinked React Native library is
+// included as a Gradle SUBPROJECT of the app (the Community CLI writes the
+// `include`/`projectDir` lines into the app's settings.gradle), so the Android
+// Gradle Plugin and the Kotlin plugin already sit on the root build's
+// buildscript classpath. Declaring versions here is how you get
+// "Could not find method android()" or a plugin-version clash with the app.
+//
+// If you publish this library to Maven and build it standalone, add a
+// buildscript block that pins AGP and Kotlin at that point — not before.
+//
+// Applying `com.facebook.react` is what wires Codegen in. For a project that
+// applies `com.android.library`, ReactPlugin registers
+// `generateCodegenSchemaFromJavaScript` and `generateCodegenArtifactsFromSchema`,
+// makes `preBuild` depend on them, and adds
+// `build/generated/source/codegen/java` to the main Java source set. There is
+// no task to invoke by hand in a normal build.
+
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+
+android {
+    // AGP 9 no longer accepts the `package` attribute in AndroidManifest.xml,
+    // so the namespace must be declared here. It must match the Kotlin
+    // `package` declarations and the `javaPackageName` in package.json's
+    // codegenConfig, otherwise the generated spec lands in a package your
+    // sources cannot see.
+    namespace "com.gradientview"
+
+    // Read from react-native 0.87.1's own gradle/libs.versions.toml:
+    // minSdk = 24, compileSdk = 37, buildTools = 37.0.0.
+    compileSdk 37
+    buildToolsVersion "37.0.0"
+
+    defaultConfig {
+        minSdk 24
+    }
+
+    // React Native 0.87 publishes its AAR with an aar-metadata minCompileSdk of
+    // 34, so a consuming app below that fails to resolve react-android.
+    aarMetadata {
+        minCompileSdk 34
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    // Versionless on purpose. The `com.facebook.react` plugin applied by the
+    // APP forces every `com.facebook.react:react-android` dependency in the
+    // build to the version in the app's package.json, and substitutes the
+    // deprecated `com.facebook.react:react-native` coordinate for it. Pinning a
+    // version here would fight that and break when the app upgrades.
+    implementation "com.facebook.react:react-android"
+}

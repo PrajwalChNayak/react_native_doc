@@ -1,0 +1,25 @@
+{
+  "name": "expo-example-public-leak",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "tsc": "tsc --noEmit",
+    "check-deps": "expo install --check",
+    "config:public": "expo config --type public",
+    "export": "expo export --platform android --output-dir dist",
+    "prove-leak": "node scripts/prove-leak.mjs"
+  },
+  "dependencies": {
+    "expo": "~57.0.22",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  }
+}

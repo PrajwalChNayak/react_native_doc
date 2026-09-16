@@ -1,0 +1,25 @@
+{
+  "name": "expo-example-native-module",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "tsc": "tsc --noEmit",
+    "check-deps": "expo install --check",
+    "config:public": "expo config --type public",
+    "export": "expo export --platform android --output-dir dist"
+  },
+  "dependencies": {
+    "expo": "~57.0.22",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  }
+}

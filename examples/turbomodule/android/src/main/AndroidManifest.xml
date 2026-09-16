@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  A library manifest with no `package` attribute.
+
+  AGP 9 rejects `package="..."` here; the namespace lives in build.gradle
+  instead. This manifest exists only so the Android library module is valid and
+  so the library can contribute permissions or components later. This module
+  reads no protected data, so it declares no permissions: ActivityManager
+  memory info, Build.MODEL and PowerManager battery-saver state are all
+  available to any app without one.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" />

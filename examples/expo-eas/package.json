@@ -1,0 +1,28 @@
+{
+  "name": "expo-example-eas",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "tsc": "tsc --noEmit",
+    "check-deps": "expo install --check",
+    "config:public": "expo config --type public",
+    "validate:eas": "node scripts/validate-eas-json.mjs",
+    "export": "expo export --platform android --output-dir dist"
+  },
+  "dependencies": {
+    "expo": "~57.0.22",
+    "expo-constants": "~57.0.18",
+    "expo-dev-client": "~57.0.19",
+    "expo-status-bar": "~57.0.1",
+    "expo-updates": "~57.0.22",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@expo/eas-json": "24.5.0",
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  }
+}

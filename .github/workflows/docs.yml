@@ -1,0 +1,48 @@
+name: docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # react-native 0.87 requires Node >= 22.13.0.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.0'
+
+      - name: Check content
+        run: node scripts/check.mjs
+
+      # Installs a real react-native 0.87.1 so fenced ts/tsx blocks are compiled
+      # against genuine types with the Strict API active, not a stub.
+      - name: Install type-check harness (CLI half — react-native 0.87.1)
+        working-directory: tools/typecheck
+        run: npm install --legacy-peer-deps --no-audit --no-fund
+
+      # The Expo half is on a different React Native (SDK 57 pins 0.86.3), so it
+      # needs its own harness. Blocks under content/expo-* compile against this.
+      - name: Install type-check harness (Expo half — expo 57 + react-native 0.86.3)
+        working-directory: tools/typecheck-expo
+        run: npm install --legacy-peer-deps --no-audit --no-fund
+
+      - name: Type-check every fenced ts/tsx block
+        run: node scripts/typecheck-blocks.mjs
+
+      - name: Build site
+        run: node scripts/build.mjs
+
+      # The site is served from the committed docs/ folder, so a stale build is
+      # a real defect: it means the published pages do not match content/.
+      - name: Fail if committed docs/ is stale
+        run: |
+          if [ -n "$(git status --porcelain docs)" ]; then
+            echo "docs/ is out of date with content/. Run 'node scripts/build.mjs' and commit the result."
+            git --no-pager diff --stat docs
+            exit 1
+          fi

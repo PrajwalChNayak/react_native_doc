@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    "expo-status-bar",
+    "expo-sqlite",
+    "expo-audio",
+    "expo-video",
+    "expo-web-browser",
+    "expo-background-task",
+    "expo-image",
+    "expo-secure-store",
+    "expo-splash-screen",
+    "expo-font",
+    "expo-build-properties"
+  ]
+}

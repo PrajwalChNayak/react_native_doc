@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Expo Dev Build",
+    "slug": "expo-example-dev-build",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "com.example.expodevbuild"
+    },
+    "android": {
+      "package": "com.example.expodevbuild",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": ["expo-dev-client"]
+  }
+}

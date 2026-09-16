@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0.87 Breaking Changes · RN Handbook</title>
+<meta name="description" content="The complete list of what React Native 0.87 removed and deprecated, each with its replacement and a before/after pair — usable as an upgrade checklist.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2211%22%20fill%3D%22%230a58ca%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E">
+<script>(function(){try{var p=localStorage.getItem('rn-theme')||'system';var d=p==='dark'||(p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');document.documentElement.setAttribute('data-theme-pref',p);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body class="" data-base="../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="../index.html"><svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" fill="none"><ellipse cx="12" cy="12" rx="10.5" ry="4.1" stroke="currentColor" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="10.5" ry="4.1" stroke="currentColor" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10.5" ry="4.1" stroke="currentColor" stroke-width="1.5" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="2.1" fill="currentColor"/></svg><span>RN Handbook</span></a>
+  <button id="nav-toggle" class="iconbtn hamburger" type="button" aria-expanded="false" aria-controls="navmenus" aria-label="Toggle navigation"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+  <nav id="navmenus" class="navmenus" aria-label="Main"><span class="fam-label" aria-hidden="true">CLI</span><details class="menu" data-family="cli"><summary data-active="false" title="Start — React Native CLI, React Native 0.87.1">Start<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">Getting Started</p><a href="../getting-started/introduction.html">Introduction</a><a href="../getting-started/environment-setup.html">Environment Setup</a><a href="../getting-started/creating-a-project.html">Creating a Project</a><a href="../getting-started/project-structure.html">Project Structure</a><a href="../getting-started/running-on-android.html">Running on Android</a><a href="../getting-started/running-on-ios.html">Running on iOS</a><a href="../getting-started/dev-menu-and-fast-refresh.html">Dev Menu and Fast Refresh</a><a href="../getting-started/your-first-screen.html">Your First Screen</a><a href="../getting-started/learning-path.html">Learning Path</a></div><div class="menu-group"><p class="menu-group-title">Core Concepts</p><a href="../core-concepts/new-architecture.html">The New Architecture</a><a href="../core-concepts/fabric.html">Fabric</a><a href="../core-concepts/turbomodules.html">TurboModules</a><a href="../core-concepts/jsi.html">JSI</a><a href="../core-concepts/codegen.html">Codegen</a><a href="../core-concepts/hermes.html">Hermes</a><a href="../core-concepts/render-pipeline.html">The Render Pipeline</a><a href="../core-concepts/differences-from-web.html">How RN Differs from the Web</a><a href="../core-concepts/threading-model.html">JS Thread vs UI Thread</a><a href="../core-concepts/platform-differences.html">Platform Differences</a></div></div></details><details class="menu" data-family="cli"><summary data-active="false" title="UI — React Native CLI, React Native 0.87.1">UI<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">Components</p><a href="../components/view.html">View</a><a href="../components/text.html">Text</a><a href="../components/image.html">Image</a><a href="../components/scrollview.html">ScrollView</a><a href="../components/textinput.html">TextInput</a><a href="../components/pressable-and-touchables.html">Pressable and Touchables</a><a href="../components/flatlist.html">FlatList</a><a href="../components/sectionlist.html">SectionList</a><a href="../components/virtualization-and-flashlist.html">Virtualization and FlashList</a><a href="../components/modal.html">Modal</a><a href="../components/switch.html">Switch</a><a href="../components/activityindicator.html">ActivityIndicator</a><a href="../components/refreshcontrol.html">RefreshControl</a><a href="../components/keyboardavoidingview.html">KeyboardAvoidingView</a><a href="../components/safe-areas.html">Safe Areas</a></div><div class="menu-group"><p class="menu-group-title">Styling and Layout</p><a href="../styling/stylesheet.html">StyleSheet</a><a href="../styling/flexbox.html">Flexbox in React Native</a><a href="../styling/units-and-density.html">Units and Density</a><a href="../styling/dimensions.html">Dimensions and useWindowDimensions</a><a href="../styling/responsive-layouts.html">Responsive and Tablet Layouts</a><a href="../styling/platform-specific-styles.html">Platform-Specific Styles</a><a href="../styling/shadows-and-elevation.html">Shadows and Elevation</a><a href="../styling/dark-mode.html">Dark Mode</a><a href="../styling/fonts-and-icons.html">Fonts and Icons</a><a href="../styling/styling-approaches.html">Styling Approaches Compared</a></div><div class="menu-group"><p class="menu-group-title">Animation and Gestures</p><a href="../animation/animated-vs-reanimated.html">Animated vs Reanimated</a><a href="../animation/worklets.html">The UI Thread and Worklets</a><a href="../animation/shared-values.html">Shared and Derived Values</a><a href="../animation/layout-animations.html">Layout Animations</a><a href="../animation/gesture-handler.html">Gesture Handler</a><a href="../animation/scroll-driven-animation.html">Scroll-Driven Animation</a><a href="../animation/animation-performance.html">Animation Performance Rules</a><a href="../animation/reduce-motion.html">Respecting Reduce Motion</a></div></div></details><details class="menu" data-family="cli"><summary data-active="false" title="App — React Native CLI, React Native 0.87.1">App<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">Navigation</p><a href="../navigation/fundamentals.html">React Navigation Fundamentals</a><a href="../navigation/native-stack.html">Native Stack</a><a href="../navigation/tabs.html">Tabs</a><a href="../navigation/drawer.html">Drawer</a><a href="../navigation/nesting.html">Nesting Navigators</a><a href="../navigation/params-and-typed-routes.html">Params and Typed Routes</a><a href="../navigation/deep-linking.html">Deep Linking and Universal Links</a><a href="../navigation/headers.html">Headers</a><a href="../navigation/modals.html">Modals</a><a href="../navigation/state-persistence.html">State Persistence</a><a href="../navigation/navigation-performance.html">Navigation Performance</a></div><div class="menu-group"><p class="menu-group-title">State and Data</p><a href="../state-and-data/hooks-in-react-native.html">Hooks in a Native Context</a><a href="../state-and-data/context.html">Context</a><a href="../state-and-data/zustand-and-redux.html">Zustand and Redux Toolkit</a><a href="../state-and-data/data-fetching.html">Data Fetching and Caching</a><a href="../state-and-data/offline-first.html">Offline-First</a><a href="../state-and-data/asyncstorage-vs-mmkv.html">AsyncStorage vs MMKV</a><a href="../state-and-data/secure-storage.html">Secure Storage</a><a href="../state-and-data/app-lifecycle.html">App Lifecycle and AppState</a><a href="../state-and-data/background-refresh.html">Background Refresh</a></div><div class="menu-group"><p class="menu-group-title">Platform APIs</p><a href="../platform-apis/permissions.html">Permissions</a><a href="../platform-apis/camera.html">Camera</a><a href="../platform-apis/geolocation.html">Geolocation</a><a href="../platform-apis/notifications.html">Push and Local Notifications</a><a href="../platform-apis/file-system.html">File System</a><a href="../platform-apis/clipboard-and-share.html">Clipboard and Share</a><a href="../platform-apis/linking.html">Linking</a><a href="../platform-apis/biometrics.html">Biometrics</a><a href="../platform-apis/haptics.html">Haptics</a><a href="../platform-apis/background-tasks.html">Background Tasks</a><a href="../platform-apis/accessibility.html">Accessibility APIs</a></div></div></details><details class="menu" data-family="cli"><summary data-active="false" title="Native — React Native CLI, React Native 0.87.1">Native<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">Native Modules</p><a href="../native-modules/when-you-need-native-code.html">When You Need Native Code</a><a href="../native-modules/turbomodules-end-to-end.html">TurboModules End to End</a><a href="../native-modules/fabric-native-components.html">Fabric Native Components</a><a href="../native-modules/codegen-specs.html">Codegen and Spec Files</a><a href="../native-modules/writing-a-module-in-kotlin.html">Writing a Module in Kotlin</a><a href="../native-modules/writing-a-module-in-swift.html">Writing a Module in Swift</a><a href="../native-modules/autolinking.html">Autolinking and react-native.config.js</a><a href="../native-modules/platform-folders.html">Platform Folders</a><a href="../native-modules/publishing-a-native-library.html">Publishing a Native Library</a><a href="../native-modules/debugging-native-code.html">Debugging Native Code</a></div></div></details><details class="menu" data-family="cli"><summary data-active="false" title="Quality — React Native CLI, React Native 0.87.1">Quality<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">Performance</p><a href="../performance/hermes-and-bytecode.html">Hermes and Bytecode</a><a href="../performance/measuring-first.html">Measuring Before Optimising</a><a href="../performance/render-performance.html">Render Performance and Memoization</a><a href="../performance/list-performance.html">List Performance in Depth</a><a href="../performance/image-performance.html">Image Performance and Caching</a><a href="../performance/startup-time.html">Startup Time</a><a href="../performance/bundle-size.html">Bundle Size</a><a href="../performance/memory.html">Memory</a><a href="../performance/profiling.html">The Profiler and React Native DevTools</a><a href="../performance/common-performance-mistakes.html">Common Performance Mistakes</a></div><div class="menu-group"><p class="menu-group-title">Debugging and DevTools</p><a href="../debugging/react-native-devtools.html">React Native DevTools</a><a href="../debugging/console-and-logs.html">Console and Logs</a><a href="../debugging/source-maps.html">Source Maps</a><a href="../debugging/network-inspection.html">Network Inspection</a><a href="../debugging/error-boundaries.html">Error Boundaries</a><a href="../debugging/crash-reporting.html">Crash Reporting</a><a href="../debugging/native-crash-logs.html">Native Crash Logs</a><a href="../debugging/release-stack-traces.html">Reading a Release Stack Trace</a></div><div class="menu-group"><p class="menu-group-title">Testing</p><a href="../testing/jest-setup.html">Jest Setup</a><a href="../testing/testing-library.html">React Native Testing Library</a><a href="../testing/mocking-native-modules.html">Mocking Native Modules</a><a href="../testing/snapshot-testing.html">Snapshot Testing</a><a href="../testing/end-to-end.html">End-to-End with Detox or Maestro</a><a href="../testing/ci-for-mobile.html">CI for Mobile</a></div><div class="menu-group"><p class="menu-group-title">Reference</p><a href="../reference/component-reference.html">Component Reference</a><a href="../reference/api-reference.html">API Reference</a><a href="../reference/cli-reference.html">CLI Command Reference</a><a href="../reference/cheat-sheet.html">Cheat Sheet</a><a href="../reference/troubleshooting.html">Troubleshooting</a></div></div></details><details class="menu" data-family="cli"><summary data-active="true" title="Ship — React Native CLI, React Native 0.87.1">Ship<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">Build and Release</p><a href="../build-and-release/build-variants.html">Build Variants and Flavours</a><a href="../build-and-release/environment-configuration.html">Environment Configuration</a><a href="../build-and-release/icons-and-splash-screens.html">App Icons and Splash Screens</a><a href="../build-and-release/android-signing.html">Android Signing</a><a href="../build-and-release/play-store-submission.html">AAB and Play Store Submission</a><a href="../build-and-release/proguard-and-r8.html">ProGuard and R8</a><a href="../build-and-release/ios-signing.html">iOS Signing and Provisioning</a><a href="../build-and-release/app-store-submission.html">TestFlight and App Store Submission</a><a href="../build-and-release/versioning.html">Versioning Strategy</a><a href="../build-and-release/fastlane.html">Fastlane</a><a href="../build-and-release/ci-pipelines.html">CI Pipelines</a><a href="../build-and-release/over-the-air-updates.html">Over-the-Air Updates</a><a href="../build-and-release/release-checklist.html">Release Checklist</a></div><div class="menu-group"><p class="menu-group-title">Security</p><a href="../security/threat-model.html">Threat Model</a><a href="../security/secrets-in-the-bundle.html">Why Secrets in JS Are Readable</a><a href="../security/secure-storage-keychain-keystore.html">Keychain and Keystore</a><a href="../security/certificate-pinning.html">Certificate Pinning</a><a href="../security/network-security-config.html">Network Security Config and ATS</a><a href="../security/deep-link-validation.html">Deep Link Validation</a><a href="../security/webview-hardening.html">WebView Hardening</a><a href="../security/obfuscation.html">Obfuscation and Its Limits</a><a href="../security/root-and-jailbreak-detection.html">Root and Jailbreak Detection</a><a href="../security/permissions-hygiene.html">Permissions Hygiene</a><a href="../security/dependency-auditing.html">Dependency Auditing</a><a href="../security/safe-logging.html">Safe Logging in Release Builds</a></div><div class="menu-group"><p class="menu-group-title">Upgrading and Migration</p><a href="../migration/upgrade-helper-workflow.html">The Upgrade Helper Workflow</a><a href="../migration/breaking-changes-087.html" aria-current="page">0.87 Breaking Changes</a><a href="../migration/strict-typescript-api.html">Migrating to the Strict TypeScript API</a><a href="../migration/new-architecture-migration.html">New Architecture Migration</a><a href="../migration/cocoapods-to-spm.html">CocoaPods to Swift Package Manager</a><a href="../migration/native-dependency-compatibility.html">Native Dependency Compatibility</a></div></div></details><span class="fam-label" aria-hidden="true">Expo</span><details class="menu" data-family="expo"><summary data-active="false" title="Expo — Expo SDK 57, React Native 0.86.3">Expo<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">Expo: Getting Started</p><a href="../expo-getting-started/introduction.html">What Expo Actually Is</a><a href="../expo-getting-started/choosing-expo-or-cli.html">Choosing Expo or the Bare CLI</a><a href="../expo-getting-started/prerequisites.html">Prerequisites</a><a href="../expo-getting-started/creating-a-project.html">Creating a Project</a><a href="../expo-getting-started/project-structure.html">Project Structure</a><a href="../expo-getting-started/running-on-a-simulator.html">Running on a Simulator</a><a href="../expo-getting-started/running-on-a-device.html">Running on a Device</a><a href="../expo-getting-started/running-on-web.html">Running on the Web</a><a href="../expo-getting-started/dev-server-and-fast-refresh.html">The Dev Server and Fast Refresh</a></div><div class="menu-group"><p class="menu-group-title">Expo Core Concepts</p><a href="../expo-core-concepts/expo-go-vs-development-builds.html">Expo Go vs Development Builds</a><a href="../expo-core-concepts/continuous-native-generation.html">Continuous Native Generation</a><a href="../expo-core-concepts/prebuild.html">expo prebuild</a><a href="../expo-core-concepts/app-config.html">The App Config</a><a href="../expo-core-concepts/expo-install-and-sdk-alignment.html">expo install and SDK Alignment</a><a href="../expo-core-concepts/cng-vs-committed-native.html">CNG vs Committed Native Directories</a></div><div class="menu-group"><p class="menu-group-title">Expo Router</p><a href="../expo-router/fundamentals.html">Expo Router Fundamentals</a><a href="../expo-router/app-directory.html">The app Directory</a><a href="../expo-router/layouts.html">Layouts</a><a href="../expo-router/stack.html">Stack</a><a href="../expo-router/tabs.html">Tabs</a><a href="../expo-router/drawer.html">Drawer</a><a href="../expo-router/dynamic-routes.html">Dynamic and Catch-All Routes</a><a href="../expo-router/groups.html">Groups</a><a href="../expo-router/typed-routes.html">Typed Routes</a><a href="../expo-router/navigation-and-params.html">Navigation and Params</a><a href="../expo-router/modals.html">Modals</a><a href="../expo-router/nested-navigators.html">Nested Navigators</a><a href="../expo-router/deep-linking.html">Deep Links and Universal Links</a><a href="../expo-router/redirects-and-auth.html">Redirects and Auth-Gated Routes</a><a href="../expo-router/api-routes.html">API Routes</a><a href="../expo-router/error-boundaries.html">Error Boundaries</a><a href="../expo-router/migrating-from-react-navigation.html">Migrating from React Navigation</a></div><div class="menu-group"><p class="menu-group-title">Expo SDK Libraries</p><a href="../expo-sdk/images.html">Images with expo-image</a><a href="../expo-sdk/fonts-and-splash-screens.html">Fonts and Splash Screens</a><a href="../expo-sdk/file-system-and-storage.html">File System and Storage</a><a href="../expo-sdk/secure-store.html">Secure Store</a><a href="../expo-sdk/sqlite.html">SQLite</a><a href="../expo-sdk/notifications.html">Notifications</a><a href="../expo-sdk/camera-and-media.html">Camera and Media</a><a href="../expo-sdk/location.html">Location</a><a href="../expo-sdk/sensors.html">Sensors</a><a href="../expo-sdk/audio-and-video.html">Audio and Video</a><a href="../expo-sdk/authentication.html">Authentication and OAuth</a><a href="../expo-sdk/biometrics.html">Biometrics</a><a href="../expo-sdk/linking.html">Linking</a><a href="../expo-sdk/clipboard-and-haptics.html">Clipboard and Haptics</a><a href="../expo-sdk/background-tasks.html">Background Tasks</a><a href="../expo-sdk/permissions-patterns.html">Permissions Patterns</a></div><div class="menu-group"><p class="menu-group-title">Development Builds</p><a href="../expo-development-builds/why-you-need-one.html">Why You Need a Development Build</a><a href="../expo-development-builds/creating-locally.html">Creating One Locally</a><a href="../expo-development-builds/creating-with-eas.html">Creating One with EAS</a><a href="../expo-development-builds/installing-on-a-device.html">Installing It on a Device</a><a href="../expo-development-builds/dev-client-features.html">expo-dev-client Features</a><a href="../expo-development-builds/adding-native-dependencies.html">Adding Native Dependencies</a><a href="../expo-development-builds/debugging.html">Debugging a Development Build</a></div><div class="menu-group"><p class="menu-group-title">Config Plugins</p><a href="../expo-config-plugins/what-they-are.html">What a Config Plugin Is</a><a href="../expo-config-plugins/using-community-plugins.html">Using Community Plugins</a><a href="../expo-config-plugins/build-properties.html">expo-build-properties</a><a href="../expo-config-plugins/writing-your-own.html">Writing Your Own Plugin</a><a href="../expo-config-plugins/mods.html">Mods and the Dangerous Mods</a><a href="../expo-config-plugins/verifying-output.html">Verifying Generated Native Output</a><a href="../expo-config-plugins/testing-and-failures.html">Testing Plugins and Common Failures</a></div><div class="menu-group"><p class="menu-group-title">Native Code with Expo</p><a href="../expo-native-code/expo-modules-api.html">The Expo Modules API</a><a href="../expo-native-code/module-in-kotlin.html">Writing a Module in Kotlin</a><a href="../expo-native-code/module-in-swift.html">Writing a Module in Swift</a><a href="../expo-native-code/view-components.html">View Components</a><a href="../expo-native-code/vs-turbomodules.html">Expo Modules vs TurboModules</a><a href="../expo-native-code/local-modules.html">Local Modules</a><a href="../expo-native-code/publishing.html">Publishing an Expo Module</a><a href="../expo-native-code/community-interop.html">Interoperating with Community Libraries</a></div></div></details><details class="menu" data-family="expo"><summary data-active="false" title="Expo Ship — Expo SDK 57, React Native 0.86.3">Expo Ship<svg class="chev" width="10" height="10" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="menu-panel"><div class="menu-group"><p class="menu-group-title">EAS</p><a href="../expo-eas/overview.html">EAS Overview</a><a href="../expo-eas/eas-json.html">eas.json and Build Profiles</a><a href="../expo-eas/credentials.html">Credentials Management</a><a href="../expo-eas/building.html">Building on EAS</a><a href="../expo-eas/local-builds.html">Building Locally</a><a href="../expo-eas/internal-distribution.html">Internal Distribution</a><a href="../expo-eas/submit.html">EAS Submit</a><a href="../expo-eas/update.html">EAS Update</a><a href="../expo-eas/runtime-versions.html">Runtime Versions, Channels and Branches</a><a href="../expo-eas/rollouts-and-rollbacks.html">Rollouts and Rollbacks</a><a href="../expo-eas/ota-limits-and-policy.html">What OTA Updates May Not Change</a><a href="../expo-eas/costs-and-limits.html">Costs and Limits</a><a href="../expo-eas/workflows.html">EAS Workflows</a></div><div class="menu-group"><p class="menu-group-title">Expo Performance</p><a href="../expo-performance/measuring-first.html">Measuring Before Optimising</a><a href="../expo-performance/startup-time.html">Startup Time and the Splash Screen</a><a href="../expo-performance/bundle-size.html">Bundle Size and Tree Shaking</a><a href="../expo-performance/hermes.html">Hermes</a><a href="../expo-performance/image-performance.html">Image Performance with expo-image</a><a href="../expo-performance/list-performance.html">List Performance</a><a href="../expo-performance/asset-strategy.html">Asset Strategy</a><a href="../expo-performance/profiling.html">Profiling</a></div><div class="menu-group"><p class="menu-group-title">Expo Security</p><a href="../expo-security/what-ships-in-the-bundle.html">What Ships Inside the Bundle</a><a href="../expo-security/expo-public-env-vars.html">EXPO_PUBLIC_ Variables and the Leak They Cause</a><a href="../expo-security/eas-secrets.html">EAS Secrets and Build-Time Variables</a><a href="../expo-security/secure-store-vs-asyncstorage.html">expo-secure-store vs AsyncStorage</a><a href="../expo-security/oauth-and-pkce.html">OAuth with expo-auth-session and PKCE</a><a href="../expo-security/deep-link-validation.html">Deep Link Validation</a><a href="../expo-security/certificate-pinning.html">Certificate Pinning Options</a><a href="../expo-security/update-signing.html">EAS Update Signing</a><a href="../expo-security/permissions-hygiene.html">Permissions Hygiene</a><a href="../expo-security/dependency-auditing.html">Dependency Auditing</a></div><div class="menu-group"><p class="menu-group-title">Expo Testing</p><a href="../expo-testing/jest-expo.html">Jest with jest-expo</a><a href="../expo-testing/testing-library.html">React Native Testing Library</a><a href="../expo-testing/mocking-expo-modules.html">Mocking Expo Modules</a><a href="../expo-testing/end-to-end.html">End-to-End on Development Builds</a><a href="../expo-testing/ci.html">Testing in CI</a></div><div class="menu-group"><p class="menu-group-title">Expo Build and Release</p><a href="../expo-build-and-release/icons-and-splash-screens.html">App Icons and Splash Screens</a><a href="../expo-build-and-release/versioning.html">Versioning and Runtime Versions</a><a href="../expo-build-and-release/environments.html">Build Profiles per Environment</a><a href="../expo-build-and-release/store-metadata.html">App Store Metadata</a><a href="../expo-build-and-release/submission-checklists.html">Submission Checklists</a><a href="../expo-build-and-release/staged-rollouts.html">Staged Rollouts</a><a href="../expo-build-and-release/monitoring.html">Monitoring</a><a href="../expo-build-and-release/rollback-strategy.html">Rollback Strategy</a></div><div class="menu-group"><p class="menu-group-title">Expo vs Bare CLI</p><a href="../expo-vs-bare/comparison.html">An Honest Comparison</a><a href="../expo-vs-bare/what-expo-costs.html">What Expo Gives You and What It Costs</a><a href="../expo-vs-bare/when-bare-is-better.html">When the Bare CLI Is Better</a><a href="../expo-vs-bare/ejecting-is-gone.html">Ejecting Is Not a Thing Any More</a><a href="../expo-vs-bare/adopting-expo.html">Adopting Expo in an Existing Bare App</a><a href="../expo-vs-bare/moving-to-bare.html">Moving from Expo to Bare</a></div><div class="menu-group"><p class="menu-group-title">Expo Migration and Reference</p><a href="../expo-migration/upgrading-sdk.html">Upgrading Between SDK Versions</a><a href="../expo-migration/install-check-and-fix.html">expo install --check and --fix</a><a href="../expo-migration/sdk-react-native-pairing.html">SDK to React Native Pairing</a><a href="../expo-migration/removed-commands.html">expo init and Other Removed Commands</a><a href="../expo-migration/cli-reference.html">Expo CLI Reference</a><a href="../expo-migration/app-config-reference.html">App Config Reference</a><a href="../expo-migration/cheat-sheet.html">Expo Cheat Sheet</a><a href="../expo-migration/troubleshooting.html">Expo Troubleshooting</a></div></div></details></nav>
+  <div class="spacer"></div>
+  <button id="search-open" class="searchbtn" type="button" aria-label="Search the handbook"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m10.6 10.6 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Search</span><kbd>/</kbd></button>
+  <button id="theme-toggle" class="iconbtn" type="button" aria-label="Toggle theme"><svg data-icon="light" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3.1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg data-icon="dark" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 10.2A5.8 5.8 0 0 1 5.8 2.5a5.8 5.8 0 1 0 7.7 7.7Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><svg data-icon="system" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.6" y="2.6" width="12.8" height="8.6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.6 13.8h4.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+</header>
+<div class="shell">
+<main id="main" class="main">
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="../index.html">Home</a><span class="sep">/</span>
+  <a href="../index.html#migration">Upgrading and Migration</a><span class="sep">/</span>
+  <span aria-current="page">0.87 Breaking Changes</span>
+</nav>
+<div class="page-head">
+<h1>0.87 Breaking Changes</h1>
+<p class="lede">The complete list of what React Native 0.87 removed and deprecated, each with its replacement and a before/after pair — usable as an upgrade checklist.</p>
+<div class="badges"><span class="badge badge-cli" title="React Native Community CLI, React Native 0.87.1">RN CLI · 0.87.1</span></div>
+</div>
+<article class="prose">
+<p>This is the definitive list for React Native 0.87.1. Every removal and every deprecation is below, with the replacement and, where code is involved, a before/after pair. Work through it top to bottom as a checklist.</p>
+<p>Two of the changes here are large enough to have their own pages: <a href="strict-typescript-api.html">Migrating to the Strict TypeScript API</a> for the deep-import and ref-type changes, and <a href="cocoapods-to-spm.html">CocoaPods to Swift Package Manager</a> for the experimental iOS build path. This page gives the short form of both and links out.</p>
+<aside class="callout callout-legacy" role="note"><p class="callout-title"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.6V8l2.4 1.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Legacy code appears on this page on purpose</span></p><div class="callout-body"><p>Every &quot;before&quot; block below shows code that no longer works. It is here so you can recognise it in your own project. None of it is a pattern to copy, and none of it compiles against 0.87.</p></div></aside>
+<h2 id="how-to-use-this-page">How to use this page<a class="anchor" href="#how-to-use-this-page" aria-label="Link to this section">#</a></h2>
+<ol><li><p>Run <code>npx tsc --noEmit</code>. Under the Strict TypeScript API this catches the type-level removals — deep imports, <code>*Properties</code> aliases, ref types — as hard errors, which is most of section 1.</p></li><li>Grep for the runtime removals, which the compiler cannot always see.</li><li>Build both platforms. The native removals in sections 4 and 5 surface there.</li><li>Run the app. The behavioural changes in section 3 do not break the build.</li></ol>
+<p>A grep pass that finds most of it:</p>
+<figure class="code" data-lang="bash">
+<figcaption><span class="code-label">bash</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-bash"><span class="tk-f">grep</span> <span class="tk-a">-rn</span> <span class="tk-a">--include</span>=*.ts <span class="tk-a">--include</span>=*.tsx <span class="tk-a">--include</span>=*.js <span class="tk-a">--include</span>=*.jsx \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;react-native/Libraries/&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;react-native/src/private/&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;InteractionManager&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;rn-get-polyfills&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;InitializeCore&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;useTurboModules&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;NativeMethods&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;Properties\b&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;NativeDialogManagerAndroid&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;@react-native/core-cli-utils&quot;</span> \
+  <span class="tk-a">-e</span> <span class="tk-s">&quot;@react-native/assets-registry&quot;</span> \
+  src/</code></pre>
+</figure>
+<hr>
+<h2 id="1-removed-type-level-and-import-level">1. Removed — type-level and import-level<a class="anchor" href="#1-removed-type-level-and-import-level" aria-label="Link to this section">#</a></h2>
+<h3 id="11-deep-imports-into-react-nativelibraries-and-react-nativesrcprivate">1.1 Deep imports into <code>react-native/Libraries/</code> and <code>react-native/src/private/</code><a class="anchor" href="#11-deep-imports-into-react-nativelibraries-and-react-nativesrcprivate" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> import from the package root.</p>
+<p>This is enforced by the <code>exports</code> map in <code>react-native</code> itself, which sets <code>&quot;types&quot;: null</code> for <code>./Libraries/*</code>. It is a type error, not a lint rule.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import StyleSheet from 'react-native/Libraries/StyleSheet/StyleSheet';</span>
+<span class="tk-del">-import Platform from 'react-native/Libraries/Utilities/Platform';</span>
+<span class="tk-del">-import type {ViewProps} from 'react-native/Libraries/Components/View/ViewPropTypes';</span>
+<span class="tk-ins">+import {StyleSheet, Platform} from 'react-native';</span>
+<span class="tk-ins">+import type {ViewProps} from 'react-native';</span></code></pre>
+</figure>
+<p>Imports from <code>react-native/src/private/</code> were <strong>removed</strong>, not merely untyped. Everything that used to be reached that way and is still public is re-exported from the root — <code>HostInstance</code>, <code>AssetRegistry</code>, <code>DevMenu</code>, <code>VirtualViewMode</code> and the <code>unstable_Virtual*</code> family all come from <code>'react-native'</code> now.</p>
+<p>Full treatment, including the temporary opt-out: <a href="strict-typescript-api.html">Migrating to the Strict TypeScript API</a>.</p>
+<h3 id="12-properties-type-aliases">1.2 <code>*Properties</code> type aliases<a class="anchor" href="#12-properties-type-aliases" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> the <code>*Props</code> name.</p>
+<p><code>ViewProperties</code>, <code>TextProperties</code>, <code>ImageProperties</code>, <code>ScrollViewProperties</code>, <code>TextInputProperties</code>, <code>TouchableOpacityProperties</code> and the rest were long-standing aliases. They are gone.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import type {ViewProperties, TextProperties} from 'react-native';</span>
+<span class="tk-ins">+import type {ViewProps, TextProps} from 'react-native';</span>
+
+<span class="tk-del">-type Props = ViewProperties &amp; {title: string};</span>
+<span class="tk-ins">+type Props = ViewProps &amp; {title: string};</span></code></pre>
+</figure>
+<p>The compiler names the missing type, so <code>tsc --noEmit</code> finds every one.</p>
+<h3 id="13-nativemethods-and-nativemethodsmixin">1.3 <code>NativeMethods</code> and <code>NativeMethodsMixin</code><a class="anchor" href="#13-nativemethods-and-nativemethodsmixin" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>HostInstance</code>.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import type {NativeMethods} from 'react-native';</span>
+<span class="tk-ins">+import type {HostInstance} from 'react-native';</span>
+
+<span class="tk-del">-function measure(ref: React.RefObject&lt;NativeMethods | null&gt;) {</span>
+<span class="tk-ins">+function measure(ref: React.RefObject&lt;HostInstance | null&gt;) {</span>
+   ref.current?.measureInWindow((x, y, width, height) =&gt; {
+     console.log(x, y, width, height);
+   });
+ }</code></pre>
+</figure>
+<p>For a ref to a specific component, prefer that component's own instance type — <code>ViewInstance</code>, <code>TextInputInstance</code>, <code>ScrollViewInstance</code>, <code>FlatListInstance</code>, <code>TextInstance</code>, <code>PressableInstance</code>, <code>ModalInstance</code>, <code>SectionListInstance</code> and so on. <code>HostInstance</code> is the generic fallback for helpers that accept any host element.</p>
+<p>The working form:</p>
+<figure class="code" data-lang="tsx">
+<figcaption><span class="code-label">After — per-component instance types</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-tsx"><span class="tk-k">import</span> <span class="tk-p">{</span>useRef<span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react'</span><span class="tk-p">;</span>
+<span class="tk-k">import</span> <span class="tk-p">{</span><span class="tk-t">View</span><span class="tk-p">,</span> <span class="tk-t">TextInput</span><span class="tk-p">,</span> <span class="tk-t">ScrollView</span><span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native'</span><span class="tk-p">;</span>
+<span class="tk-k">import</span> <span class="tk-k">type</span> <span class="tk-p">{</span><span class="tk-t">ViewInstance</span><span class="tk-p">,</span> <span class="tk-t">TextInputInstance</span><span class="tk-p">,</span> <span class="tk-t">ScrollViewInstance</span><span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native'</span><span class="tk-p">;</span>
+
+<span class="tk-k">export</span> <span class="tk-k">function</span> <span class="tk-t">Form</span><span class="tk-p">()</span> <span class="tk-p">{</span>
+  <span class="tk-k">const</span> row <span class="tk-p">=</span> useRef<span class="tk-p">&lt;</span><span class="tk-t">ViewInstance</span> <span class="tk-p">|</span> <span class="tk-k">null</span><span class="tk-p">&gt;(</span><span class="tk-k">null</span><span class="tk-p">);</span>
+  <span class="tk-k">const</span> input <span class="tk-p">=</span> useRef<span class="tk-p">&lt;</span><span class="tk-t">TextInputInstance</span> <span class="tk-p">|</span> <span class="tk-k">null</span><span class="tk-p">&gt;(</span><span class="tk-k">null</span><span class="tk-p">);</span>
+  <span class="tk-k">const</span> scroller <span class="tk-p">=</span> useRef<span class="tk-p">&lt;</span><span class="tk-t">ScrollViewInstance</span> <span class="tk-p">|</span> <span class="tk-k">null</span><span class="tk-p">&gt;(</span><span class="tk-k">null</span><span class="tk-p">);</span>
+
+  <span class="tk-k">return</span> <span class="tk-p">(</span>
+    <span class="tk-p">&lt;</span><span class="tk-t">ScrollView</span> ref<span class="tk-p">={</span>scroller<span class="tk-p">}&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">View</span> ref<span class="tk-p">={</span>row<span class="tk-p">}&gt;</span>
+        <span class="tk-p">&lt;</span><span class="tk-t">TextInput</span> ref<span class="tk-p">={</span>input<span class="tk-p">}</span> inputMode<span class="tk-p">=</span><span class="tk-s">&quot;email&quot;</span> autoCapitalize<span class="tk-p">=</span><span class="tk-s">&quot;none&quot;</span> <span class="tk-p">/&gt;</span>
+      <span class="tk-p">&lt;/</span><span class="tk-t">View</span><span class="tk-p">&gt;</span>
+    <span class="tk-p">&lt;/</span><span class="tk-t">ScrollView</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">);</span>
+<span class="tk-p">}</span></code></pre>
+</figure>
+<hr>
+<h2 id="2-removed-javascript-apis">2. Removed — JavaScript APIs<a class="anchor" href="#2-removed-javascript-apis" aria-label="Link to this section">#</a></h2>
+<h3 id="21-interactionmanager">2.1 <code>InteractionManager</code><a class="anchor" href="#21-interactionmanager" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> the <code>requestIdleCallback</code> global.</p>
+<p><code>InteractionManager.runAfterInteractions</code> existed to defer work until touch interactions and animations finished, which mattered when everything shared one serialised queue. It is removed.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import {InteractionManager} from 'react-native';</span>
+<span class="tk-del">-</span>
+<span class="tk-del">-useEffect(() =&gt; {</span>
+<span class="tk-del">-  const handle = InteractionManager.runAfterInteractions(() =&gt; {</span>
+<span class="tk-del">-    prefetchNextScreen();</span>
+<span class="tk-del">-  });</span>
+<span class="tk-del">-  return () =&gt; handle.cancel();</span>
+<span class="tk-del">-}, []);</span>
+<span class="tk-ins">+useEffect(() =&gt; {</span>
+<span class="tk-ins">+  // requestIdleCallback is a global; there is nothing to import.</span>
+<span class="tk-ins">+  const id = requestIdleCallback(() =&gt; {</span>
+<span class="tk-ins">+    prefetchNextScreen();</span>
+<span class="tk-ins">+  });</span>
+<span class="tk-ins">+  return () =&gt; cancelIdleCallback(id);</span>
+<span class="tk-ins">+}, []);</span></code></pre>
+</figure>
+<aside class="callout callout-note" role="note"><p class="callout-title"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4M8 4.8v.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>`requestIdleCallback` has no type declaration in 0.87.1</span></p><div class="callout-body"><p>It is a runtime global, but <code>react-native</code>'s <code>globals.d.ts</code> in 0.87.1 does not declare it (<code>requestAnimationFrame</code>, <code>setImmediate</code> and <code>fetch</code> are declared; <code>requestIdleCallback</code> is not). Until it is, declare it once in your own <code>globals.d.ts</code>:</p>
+<figure class="code" data-lang="ts">
+<figcaption><span class="code-label">ts</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-ts">declare <span class="tk-k">function</span> <span class="tk-f">requestIdleCallback</span><span class="tk-p">(</span>
+  callback<span class="tk-p">:</span> <span class="tk-p">()</span> <span class="tk-p">=&gt;</span> <span class="tk-k">void</span><span class="tk-p">,</span>
+  options<span class="tk-p">?:</span> <span class="tk-p">{</span>timeout<span class="tk-p">:</span> <span class="tk-t">number</span><span class="tk-p">},</span>
+<span class="tk-p">):</span> <span class="tk-t">number</span><span class="tk-p">;</span>
+declare <span class="tk-k">function</span> <span class="tk-f">cancelIdleCallback</span><span class="tk-p">(</span>handle<span class="tk-p">:</span> <span class="tk-t">number</span><span class="tk-p">):</span> <span class="tk-k">void</span><span class="tk-p">;</span></code></pre>
+</figure></div></aside>
+<h3 id="22-modals-animated-prop">2.2 <code>Modal</code>'s <code>animated</code> prop<a class="anchor" href="#22-modals-animated-prop" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>animationType</code>.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-&lt;Modal visible={open} animated onRequestClose={close}&gt;</span>
+<span class="tk-ins">+&lt;Modal visible={open} animationType=&quot;slide&quot; onRequestClose={close}&gt;</span>
+   &lt;Content /&gt;
+ &lt;/Modal&gt;</code></pre>
+</figure>
+<p><code>animationType</code> takes <code>'none' | 'slide' | 'fade'</code>. The old boolean meant &quot;slide&quot;, so <code>'slide'</code> is the like-for-like replacement.</p>
+<h3 id="23-statusbar-props-backgroundcolor-translucent-networkactivityindicatorvisible">2.3 <code>StatusBar</code> props <code>backgroundColor</code>, <code>translucent</code>, <code>networkActivityIndicatorVisible</code><a class="anchor" href="#23-statusbar-props-backgroundcolor-translucent-networkactivityindicatorvisible" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> edge-to-edge layout and native theming. The matching setter methods (<code>StatusBar.setBackgroundColor</code>, <code>StatusBar.setTranslucent</code>, <code>StatusBar.setNetworkActivityIndicatorVisible</code>) are removed with them.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-&lt;StatusBar</span>
+<span class="tk-del">-  barStyle=&quot;light-content&quot;</span>
+<span class="tk-del">-  backgroundColor=&quot;#101418&quot;</span>
+<span class="tk-del">-  translucent</span>
+<span class="tk-del">-  networkActivityIndicatorVisible={loading}</span>
+<span class="tk-del">-/&gt;</span>
+<span class="tk-ins">+&lt;StatusBar barStyle=&quot;light-content&quot; /&gt;</span></code></pre>
+</figure>
+<p><code>backgroundColor</code> and <code>translucent</code> were Android-only, and Android's edge-to-edge model made them meaningless: the app draws behind the system bars and you handle the insets. Colour the area yourself with a <code>View</code> sized to the top inset from <code>react-native-safe-area-context</code>. <code>networkActivityIndicatorVisible</code> controlled an iOS status-bar spinner that iOS itself removed.</p>
+<figure class="code" data-lang="tsx">
+<figcaption><span class="code-label">After — colour the inset area yourself</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-tsx"><span class="tk-k">import</span> <span class="tk-p">{</span><span class="tk-t">View</span><span class="tk-p">,</span> <span class="tk-t">StatusBar</span><span class="tk-p">,</span> <span class="tk-t">StyleSheet</span><span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native'</span><span class="tk-p">;</span>
+<span class="tk-k">import</span> <span class="tk-p">{</span>useSafeAreaInsets<span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native-safe-area-context'</span><span class="tk-p">;</span>
+
+<span class="tk-k">export</span> <span class="tk-k">function</span> <span class="tk-t">StatusBarBackdrop</span><span class="tk-p">()</span> <span class="tk-p">{</span>
+  <span class="tk-k">const</span> insets <span class="tk-p">=</span> <span class="tk-f">useSafeAreaInsets</span><span class="tk-p">();</span>
+  <span class="tk-k">return</span> <span class="tk-p">(</span>
+    <span class="tk-p">&lt;&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">StatusBar</span> barStyle<span class="tk-p">=</span><span class="tk-s">&quot;light-content&quot;</span> <span class="tk-p">/&gt;</span>
+      <span class="tk-p">{/*</span> <span class="tk-t">A</span> plain <span class="tk-t">View</span> under the status bar replaces the removed prop<span class="tk-p">,</span> and works
+          the same way on both platforms instead <span class="tk-k">of</span> being <span class="tk-t">Android</span><span class="tk-p">-</span>only<span class="tk-p">.</span> <span class="tk-p">*/}</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">View</span> style<span class="tk-p">={[</span>styles<span class="tk-p">.</span>backdrop<span class="tk-p">,</span> <span class="tk-p">{</span>height<span class="tk-p">:</span> insets<span class="tk-p">.</span>top<span class="tk-p">}]}</span> <span class="tk-p">/&gt;</span>
+    <span class="tk-p">&lt;/&gt;</span>
+  <span class="tk-p">);</span>
+<span class="tk-p">}</span>
+
+<span class="tk-k">const</span> styles <span class="tk-p">=</span> <span class="tk-t">StyleSheet</span><span class="tk-p">.</span><span class="tk-f">create</span><span class="tk-p">({</span>
+  backdrop<span class="tk-p">:</span> <span class="tk-p">{</span>backgroundColor<span class="tk-p">:</span> <span class="tk-s">'#101418'</span><span class="tk-p">},</span>
+<span class="tk-p">});</span></code></pre>
+</figure>
+<h3 id="24-boolean-keyboardshouldpersisttaps-on-scrollview">2.4 Boolean <code>keyboardShouldPersistTaps</code> on <code>ScrollView</code><a class="anchor" href="#24-boolean-keyboardshouldpersisttaps-on-scrollview" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> the string form, <code>'never' | 'always' | 'handled'</code>.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-&lt;ScrollView keyboardShouldPersistTaps={true}&gt;</span>
+<span class="tk-ins">+&lt;ScrollView keyboardShouldPersistTaps=&quot;always&quot;&gt;</span>
+
+<span class="tk-del">-&lt;ScrollView keyboardShouldPersistTaps={false}&gt;</span>
+<span class="tk-ins">+&lt;ScrollView keyboardShouldPersistTaps=&quot;never&quot;&gt;</span></code></pre>
+</figure>
+<p><code>'handled'</code> — dismiss the keyboard unless a child handled the tap — is usually what you actually want for a form inside a scroll view, and had no boolean equivalent.</p>
+<h3 id="25-usecolorscheme-no-longer-returns-an-unspecified-string">2.5 <code>useColorScheme()</code> no longer returns an &quot;unspecified&quot; string<a class="anchor" href="#25-usecolorscheme-no-longer-returns-an-unspecified-string" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> the return type is now <code>ColorSchemeName | null</code>, that is <code>'light' | 'dark' | null</code>. <code>null</code> appears only when the native Appearance module is unavailable, which in practice means an out-of-tree platform.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-const scheme = useColorScheme();</span>
+<span class="tk-del">-const isDark = scheme === 'dark';</span>
+<span class="tk-del">-const isUnset = scheme === 'unspecified';   // this value no longer exists</span>
+<span class="tk-ins">+const scheme = useColorScheme();</span>
+<span class="tk-ins">+const isDark = scheme === 'dark';</span>
+<span class="tk-ins">+// null means &quot;no Appearance module&quot;, not &quot;user has not chosen&quot;.</span></code></pre>
+</figure>
+<figure class="code" data-lang="tsx">
+<figcaption><span class="code-label">After — handling the null case</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-tsx"><span class="tk-k">import</span> <span class="tk-p">{</span><span class="tk-t">View</span><span class="tk-p">,</span> <span class="tk-t">Text</span><span class="tk-p">,</span> useColorScheme<span class="tk-p">,</span> <span class="tk-t">StyleSheet</span><span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native'</span><span class="tk-p">;</span>
+
+<span class="tk-k">export</span> <span class="tk-k">function</span> <span class="tk-t">ThemedBanner</span><span class="tk-p">()</span> <span class="tk-p">{</span>
+  <span class="tk-k">const</span> scheme <span class="tk-p">=</span> <span class="tk-f">useColorScheme</span><span class="tk-p">();</span>
+  <span class="tk-c">// Treat null as light rather than as a third theme.</span>
+  <span class="tk-k">const</span> dark <span class="tk-p">=</span> scheme <span class="tk-p">===</span> <span class="tk-s">'dark'</span><span class="tk-p">;</span>
+
+  <span class="tk-k">return</span> <span class="tk-p">(</span>
+    <span class="tk-p">&lt;</span><span class="tk-t">View</span> style<span class="tk-p">={[</span>styles<span class="tk-p">.</span>root<span class="tk-p">,</span> dark <span class="tk-p">?</span> styles<span class="tk-p">.</span>dark <span class="tk-p">:</span> styles<span class="tk-p">.</span>light<span class="tk-p">]}&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Text</span> style<span class="tk-p">={</span>dark <span class="tk-p">?</span> styles<span class="tk-p">.</span>textDark <span class="tk-p">:</span> styles<span class="tk-p">.</span>textLight<span class="tk-p">}&gt;</span><span class="tk-t">Welcome</span> back<span class="tk-p">&lt;/</span><span class="tk-t">Text</span><span class="tk-p">&gt;</span>
+    <span class="tk-p">&lt;/</span><span class="tk-t">View</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">);</span>
+<span class="tk-p">}</span>
+
+<span class="tk-k">const</span> styles <span class="tk-p">=</span> <span class="tk-t">StyleSheet</span><span class="tk-p">.</span><span class="tk-f">create</span><span class="tk-p">({</span>
+  root<span class="tk-p">:</span> <span class="tk-p">{</span>padding<span class="tk-p">:</span> <span class="tk-n">16</span><span class="tk-p">},</span>
+  light<span class="tk-p">:</span> <span class="tk-p">{</span>backgroundColor<span class="tk-p">:</span> <span class="tk-s">'#ffffff'</span><span class="tk-p">},</span>
+  dark<span class="tk-p">:</span> <span class="tk-p">{</span>backgroundColor<span class="tk-p">:</span> <span class="tk-s">'#101418'</span><span class="tk-p">},</span>
+  textLight<span class="tk-p">:</span> <span class="tk-p">{</span>color<span class="tk-p">:</span> <span class="tk-s">'#101418'</span><span class="tk-p">},</span>
+  textDark<span class="tk-p">:</span> <span class="tk-p">{</span>color<span class="tk-p">:</span> <span class="tk-s">'#f5f7fa'</span><span class="tk-p">},</span>
+<span class="tk-p">});</span></code></pre>
+</figure>
+<h3 id="26-the-useturbomodules-feature-flag">2.6 The <code>useTurboModules</code> feature flag<a class="anchor" href="#26-the-useturbomodules-feature-flag" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> nothing. TurboModules are always on and there is no switch.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-ReactNativeFeatureFlags.override({useTurboModules: () =&gt; true});</span></code></pre>
+</figure>
+<p>Related: <code>ReactNativeFeatureFlags</code> became <strong>private API</strong> in 0.82. Do not read or override it.</p>
+<h3 id="27-nativedialogmanagerandroid-export-and-the-undocumented-touchable-root-export">2.7 <code>NativeDialogManagerAndroid</code> export, and the undocumented <code>Touchable</code> root export<a class="anchor" href="#27-nativedialogmanagerandroid-export-and-the-undocumented-touchable-root-export" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>Alert</code> for dialogs; <code>Pressable</code> for touch.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import {NativeDialogManagerAndroid} from 'react-native';</span>
+<span class="tk-ins">+import {Alert} from 'react-native';</span>
+
+<span class="tk-del">-import {Touchable} from 'react-native';   // was never documented</span>
+<span class="tk-ins">+import {Pressable} from 'react-native';</span></code></pre>
+</figure>
+<p>Neither appears in the 0.87.1 export surface. <code>Alert</code> covers both platforms; <code>TouchableHighlight</code>, <code>TouchableOpacity</code>, <code>TouchableNativeFeedback</code> and <code>TouchableWithoutFeedback</code> are still exported, but <code>Pressable</code> is the primitive to build on.</p>
+<h3 id="28-react-nativern-get-polyfills">2.8 <code>react-native/rn-get-polyfills</code><a class="anchor" href="#28-react-nativern-get-polyfills" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>@react-native/js-polyfills</code>.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"> // babel.config.js / metro.config.js, wherever you reached for it
+<span class="tk-del">-const polyfills = require('react-native/rn-get-polyfills');</span>
+<span class="tk-ins">+const polyfills = require('@react-native/js-polyfills');</span></code></pre>
+</figure>
+<h3 id="29-react-nativecore-cli-utils">2.9 <code>@react-native/core-cli-utils</code><a class="anchor" href="#29-react-nativecore-cli-utils" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> none — the package is no longer published. If a script of yours imports it, or a dependency does, it must be removed or replaced with the equivalent <code>@react-native-community/cli</code> command.</p>
+<figure class="code" data-lang="bash">
+<figcaption><span class="code-label">bash</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-bash"><span class="tk-f">npm</span> <span class="tk-k">ls</span> @react<span class="tk-a">-native</span>/core<span class="tk-a">-cli-utils</span>     <span class="tk-c"># find who depends on it</span></code></pre>
+</figure>
+<h3 id="210-standalone-react-devtools-websocket-support">2.10 Standalone <code>react-devtools</code> WebSocket support<a class="anchor" href="#210-standalone-react-devtools-websocket-support" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <strong>React Native DevTools</strong>, opened from the Dev Menu.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-npx react-devtools</span>
+<span class="tk-ins">+# Open the Dev Menu (Ctrl+M on Android, Cmd+D on the iOS simulator)</span>
+<span class="tk-ins">+# and choose &quot;Open DevTools&quot;.</span></code></pre>
+</figure>
+<p>The standalone app connected over a WebSocket the runtime no longer serves.</p>
+<h3 id="211-metro-yaml-config-files-and-es6-extensions">2.11 Metro: YAML config files and <code>.es6</code> extensions<a class="anchor" href="#211-metro-yaml-config-files-and-es6-extensions" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> a JavaScript, TypeScript or ESM config; the <code>.js</code> / <code>.ts</code> extension.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-// metro.config.yaml  — no longer read</span>
+<span class="tk-ins">+// metro.config.js, metro.config.mjs or metro.config.mts</span></code></pre>
+</figure>
+<p>Metro 0.87 added stable TypeScript and ESM config files, so <code>metro.config.mts</code> is now a supported option. If any source file in your project ends in <code>.es6</code>, rename it.</p>
+<hr>
+<h2 id="3-removed-android-native">3. Removed — Android native<a class="anchor" href="#3-removed-android-native" aria-label="Link to this section">#</a></h2>
+<h3 id="31-uiblock-and-uimanagermoduleadduiblock-prependuiblock">3.1 <code>UIBlock</code> and <code>UIManagerModule.addUIBlock</code> / <code>prependUIBlock</code><a class="anchor" href="#31-uiblock-and-uimanagermoduleadduiblock-prependuiblock" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>UIManagerListener</code>, or View Commands for imperative calls into a view.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-uiManagerModule.addUIBlock(new UIBlock() {</span>
+<span class="tk-del">-  @Override</span>
+<span class="tk-del">-  public void execute(NativeViewHierarchyManager nvhm) {</span>
+<span class="tk-del">-    View view = nvhm.resolveView(reactTag);</span>
+<span class="tk-del">-    // ... touch the view on the UI thread</span>
+<span class="tk-del">-  }</span>
+<span class="tk-del">-});</span>
+<span class="tk-ins">+// Register a UIManagerListener for mount-phase callbacks, or declare a View</span>
+<span class="tk-ins">+// Command in your component spec and call it from JavaScript.</span></code></pre>
+</figure>
+<p>Under Fabric there is no <code>NativeViewHierarchyManager</code> to resolve a tag against. A View Command, declared with <code>codegenNativeCommands</code>, is the supported way to tell a specific view to do something.</p>
+<h3 id="32-new-architecture-flag-constructors-on-defaultreactactivitydelegate">3.2 New-architecture-flag constructors on <code>DefaultReactActivityDelegate</code><a class="anchor" href="#32-new-architecture-flag-constructors-on-defaultreactactivitydelegate" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> the constructor without the flag arguments.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"> override fun createReactActivityDelegate(): ReactActivityDelegate =
+<span class="tk-del">-  DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled = true)</span>
+<span class="tk-ins">+  DefaultReactActivityDelegate(this, mainComponentName)</span></code></pre>
+</figure>
+<p>The flags described a choice that no longer exists. See <a href="new-architecture-migration.html">New Architecture Migration</a>.</p>
+<hr>
+<h2 id="4-removed-ios-native">4. Removed — iOS native<a class="anchor" href="#4-removed-ios-native" aria-label="Link to this section">#</a></h2>
+<h3 id="41-timingmodule-rctturbomoduleenabled-rctenableturbomodule">4.1 <code>TimingModule</code>, <code>RCTTurboModuleEnabled()</code>, <code>RCTEnableTurboModule()</code><a class="anchor" href="#41-timingmodule-rctturbomoduleenabled-rctenableturbomodule" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> none needed — TurboModules are unconditionally enabled.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-#if RCT_NEW_ARCH_ENABLED</span>
+<span class="tk-del">-  RCTEnableTurboModule(YES);</span>
+<span class="tk-del">-#endif</span>
+<span class="tk-del">-  if (RCTTurboModuleEnabled()) {</span>
+<span class="tk-del">-    // ...</span>
+<span class="tk-del">-  }</span>
+<span class="tk-ins">+// Nothing. TurboModules are always on in 0.82+.</span></code></pre>
+</figure>
+<p>These names appear in both the removed and the deprecated lists in the 0.87 release material. Treat them as gone: they do nothing useful, and the compatibility shims are scheduled to disappear.</p>
+<h3 id="42-the-rctappdelegateh-import-path">4.2 The <code>RCTAppDelegate.h</code> import path<a class="anchor" href="#42-the-rctappdelegateh-import-path" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> the framework-qualified form.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-#import &lt;RCTAppDelegate.h&gt;</span>
+<span class="tk-ins">+#import &lt;React/RCTAppDelegate.h&gt;</span></code></pre>
+</figure>
+<p>This lands with the Swift Package Manager work, and applies whether or not you adopt SPM. See <a href="cocoapods-to-spm.html">CocoaPods to Swift Package Manager</a>.</p>
+<hr>
+<h2 id="5-deprecated-still-present-do-not-build-on-them">5. Deprecated — still present, do not build on them<a class="anchor" href="#5-deprecated-still-present-do-not-build-on-them" aria-label="Link to this section">#</a></h2>
+<p>Deprecated means the export still exists in 0.87.1 and your code still runs. It also means the replacement exists today and the deprecated form will be removed. Migrate on your schedule, but do not write new code against any of these.</p>
+<h3 id="51-react-nativelibrariescoreinitializecore">5.1 <code>react-native/Libraries/Core/InitializeCore</code><a class="anchor" href="#51-react-nativelibrariescoreinitializecore" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>react-native/setup-env</code>.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import 'react-native/Libraries/Core/InitializeCore';</span>
+<span class="tk-ins">+import 'react-native/setup-env';</span></code></pre>
+</figure>
+<p><code>setup-env</code> is a real subpath export in <code>react-native@0.87.1</code>'s <code>exports</code> map, so it resolves under the Strict API. The old path is a deep import, which means it is also caught by section 1.1.</p>
+<h3 id="52-react-nativeassets-registry">5.2 <code>@react-native/assets-registry</code><a class="anchor" href="#52-react-nativeassets-registry" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>AssetRegistry</code> exported from <code>react-native</code>, plus <code>@react-native/asset-utils</code> for the helper functions.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import AssetRegistry from '@react-native/assets-registry/registry';</span>
+<span class="tk-ins">+import {AssetRegistry} from 'react-native';</span></code></pre>
+</figure>
+<p><code>AssetRegistry</code> is part of the 0.87.1 root export surface. <code>@react-native/asset-utils</code> is a direct dependency of <code>react-native@0.87.1</code>, so it is already installed.</p>
+<h3 id="53-imagebackground">5.3 <code>ImageBackground</code><a class="anchor" href="#53-imagebackground" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> a <code>View</code> with an absolutely positioned <code>Image</code>.</p>
+<p>The type definition in 0.87.1 states it plainly: &quot;ImageBackground is deprecated and will be removed in a future release. Use a <code>View</code> with an absolutely positioned <code>Image</code> instead.&quot;</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-&lt;ImageBackground source={hero} style={styles.hero} resizeMode=&quot;cover&quot;&gt;</span>
+<span class="tk-del">-  &lt;Text style={styles.title}&gt;Summer sale&lt;/Text&gt;</span>
+<span class="tk-del">-&lt;/ImageBackground&gt;</span>
+<span class="tk-ins">+&lt;View style={styles.hero}&gt;</span>
+<span class="tk-ins">+  &lt;Image source={hero} style={StyleSheet.absoluteFill} resizeMode=&quot;cover&quot; /&gt;</span>
+<span class="tk-ins">+  &lt;Text style={styles.title}&gt;Summer sale&lt;/Text&gt;</span>
+<span class="tk-ins">+&lt;/View&gt;</span></code></pre>
+</figure>
+<figure class="code" data-lang="tsx">
+<figcaption><span class="code-label">After — the replacement in full</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-tsx"><span class="tk-k">import</span> <span class="tk-p">{</span><span class="tk-t">View</span><span class="tk-p">,</span> <span class="tk-t">Image</span><span class="tk-p">,</span> <span class="tk-t">Text</span><span class="tk-p">,</span> <span class="tk-t">StyleSheet</span><span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native'</span><span class="tk-p">;</span>
+<span class="tk-k">import</span> <span class="tk-k">type</span> <span class="tk-p">{</span><span class="tk-t">ImageSourcePropType</span><span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native'</span><span class="tk-p">;</span>
+
+<span class="tk-k">export</span> <span class="tk-k">function</span> <span class="tk-t">Hero</span><span class="tk-p">({</span>source<span class="tk-p">}:</span> <span class="tk-p">{</span>source<span class="tk-p">:</span> <span class="tk-t">ImageSourcePropType</span><span class="tk-p">})</span> <span class="tk-p">{</span>
+  <span class="tk-k">return</span> <span class="tk-p">(</span>
+    <span class="tk-p">&lt;</span><span class="tk-t">View</span> style<span class="tk-p">={</span>styles<span class="tk-p">.</span>hero<span class="tk-p">}&gt;</span>
+      <span class="tk-p">{/*</span> absoluteFill puts the image behind the content without affecting layout<span class="tk-p">,</span>
+          which <span class="tk-k">is</span> exactly what the deprecated component did internally<span class="tk-p">.</span> <span class="tk-p">*/}</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Image</span> source<span class="tk-p">={</span>source<span class="tk-p">}</span> style<span class="tk-p">={</span><span class="tk-t">StyleSheet</span><span class="tk-p">.</span>absoluteFill<span class="tk-p">}</span> resizeMode<span class="tk-p">=</span><span class="tk-s">&quot;cover&quot;</span> <span class="tk-p">/&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Text</span> style<span class="tk-p">={</span>styles<span class="tk-p">.</span>title<span class="tk-p">}&gt;</span><span class="tk-t">Summer</span> sale<span class="tk-p">&lt;/</span><span class="tk-t">Text</span><span class="tk-p">&gt;</span>
+    <span class="tk-p">&lt;/</span><span class="tk-t">View</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">);</span>
+<span class="tk-p">}</span>
+
+<span class="tk-k">const</span> styles <span class="tk-p">=</span> <span class="tk-t">StyleSheet</span><span class="tk-p">.</span><span class="tk-f">create</span><span class="tk-p">({</span>
+  hero<span class="tk-p">:</span> <span class="tk-p">{</span>height<span class="tk-p">:</span> <span class="tk-n">220</span><span class="tk-p">,</span> justifyContent<span class="tk-p">:</span> <span class="tk-s">'flex-end'</span><span class="tk-p">,</span> padding<span class="tk-p">:</span> <span class="tk-n">16</span><span class="tk-p">,</span> overflow<span class="tk-p">:</span> <span class="tk-s">'hidden'</span><span class="tk-p">},</span>
+  title<span class="tk-p">:</span> <span class="tk-p">{</span>color<span class="tk-p">:</span> <span class="tk-s">'#ffffff'</span><span class="tk-p">,</span> fontSize<span class="tk-p">:</span> <span class="tk-n">24</span><span class="tk-p">,</span> fontWeight<span class="tk-p">:</span> <span class="tk-s">'700'</span><span class="tk-p">},</span>
+<span class="tk-p">});</span></code></pre>
+</figure>
+<h3 id="54-the-nativemethods-interface">5.4 The <code>NativeMethods</code> interface<a class="anchor" href="#54-the-nativemethods-interface" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>HostInstance</code>. Covered in section 1.3 — it is listed in both the removed and the deprecated material because the type is gone from the strict surface while the concept lives on as <code>HostInstance</code>.</p>
+<h3 id="55-appearancesetcolorscheme-with-an-unspecified-argument">5.5 <code>Appearance.setColorScheme</code> with an &quot;unspecified&quot; argument<a class="anchor" href="#55-appearancesetcolorscheme-with-an-unspecified-argument" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>'auto'</code>.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-Appearance.setColorScheme('unspecified');   // reset to system</span>
+<span class="tk-ins">+Appearance.setColorScheme('auto');</span></code></pre>
+</figure>
+<p>The 0.87.1 type documents the new behaviour directly: &quot;Pass <code>'auto'</code> to reset and follow the system default (removes any override).&quot;</p>
+<figure class="code" data-lang="tsx">
+<figcaption><span class="code-label">After — a working theme override</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-tsx"><span class="tk-k">import</span> <span class="tk-p">{</span><span class="tk-t">Appearance</span><span class="tk-p">,</span> <span class="tk-t">Button</span><span class="tk-p">,</span> <span class="tk-t">View</span><span class="tk-p">,</span> <span class="tk-t">StyleSheet</span><span class="tk-p">}</span> <span class="tk-k">from</span> <span class="tk-s">'react-native'</span><span class="tk-p">;</span>
+
+<span class="tk-k">export</span> <span class="tk-k">function</span> <span class="tk-t">ThemeControls</span><span class="tk-p">()</span> <span class="tk-p">{</span>
+  <span class="tk-k">return</span> <span class="tk-p">(</span>
+    <span class="tk-p">&lt;</span><span class="tk-t">View</span> style<span class="tk-p">={</span>styles<span class="tk-p">.</span>row<span class="tk-p">}&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Button</span> title<span class="tk-p">=</span><span class="tk-s">&quot;Light&quot;</span> onPress<span class="tk-p">={()</span> <span class="tk-p">=&gt;</span> <span class="tk-t">Appearance</span><span class="tk-p">.</span><span class="tk-f">setColorScheme</span><span class="tk-p">(</span><span class="tk-s">'light'</span><span class="tk-p">)}</span> <span class="tk-p">/&gt;</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Button</span> title<span class="tk-p">=</span><span class="tk-s">&quot;Dark&quot;</span> onPress<span class="tk-p">={()</span> <span class="tk-p">=&gt;</span> <span class="tk-t">Appearance</span><span class="tk-p">.</span><span class="tk-f">setColorScheme</span><span class="tk-p">(</span><span class="tk-s">'dark'</span><span class="tk-p">)}</span> <span class="tk-p">/&gt;</span>
+      <span class="tk-p">{/*</span> <span class="tk-s">'auto'</span> removes the <span class="tk-k">override</span> and follows the system again<span class="tk-p">.</span> <span class="tk-p">*/}</span>
+      <span class="tk-p">&lt;</span><span class="tk-t">Button</span> title<span class="tk-p">=</span><span class="tk-s">&quot;System&quot;</span> onPress<span class="tk-p">={()</span> <span class="tk-p">=&gt;</span> <span class="tk-t">Appearance</span><span class="tk-p">.</span><span class="tk-f">setColorScheme</span><span class="tk-p">(</span><span class="tk-s">'auto'</span><span class="tk-p">)}</span> <span class="tk-p">/&gt;</span>
+    <span class="tk-p">&lt;/</span><span class="tk-t">View</span><span class="tk-p">&gt;</span>
+  <span class="tk-p">);</span>
+<span class="tk-p">}</span>
+
+<span class="tk-k">const</span> styles <span class="tk-p">=</span> <span class="tk-t">StyleSheet</span><span class="tk-p">.</span><span class="tk-f">create</span><span class="tk-p">({</span>
+  row<span class="tk-p">:</span> <span class="tk-p">{</span>flexDirection<span class="tk-p">:</span> <span class="tk-s">'row'</span><span class="tk-p">,</span> gap<span class="tk-p">:</span> <span class="tk-n">8</span><span class="tk-p">},</span>
+<span class="tk-p">});</span></code></pre>
+</figure>
+<h3 id="56-drawerlayoutandroid">5.6 <code>DrawerLayoutAndroid</code><a class="anchor" href="#56-drawerlayoutandroid" aria-label="Link to this section">#</a></h3>
+<p><strong>Replacement:</strong> <code>react-native-drawer-layout</code>. Android-only to begin with; the type definition points at React Navigation's drawer documentation.</p>
+<figure class="code" data-lang="diff">
+<figcaption><span class="code-label">diff</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-diff"><span class="tk-del">-import {DrawerLayoutAndroid} from 'react-native';</span>
+<span class="tk-ins">+import {Drawer} from 'react-native-drawer-layout';</span></code></pre>
+</figure>
+<p>If you are already using React Navigation, <code>@react-navigation/drawer</code> (7.13.10) is the higher-level answer and works on both platforms. See <a href="../navigation/drawer.html">Drawer</a>.</p>
+<h3 id="57-ios-timingmodule-rctturbomoduleenabled-rctenableturbomodule">5.7 iOS: <code>TimingModule</code>, <code>RCTTurboModuleEnabled()</code>, <code>RCTEnableTurboModule()</code><a class="anchor" href="#57-ios-timingmodule-rctturbomoduleenabled-rctenableturbomodule" aria-label="Link to this section">#</a></h3>
+<p>Listed here as well as in section 4.1. Same instruction: delete the calls, there is nothing to replace them with.</p>
+<hr>
+<h2 id="6-behaviour-changes-that-do-not-break-the-build">6. Behaviour changes that do not break the build<a class="anchor" href="#6-behaviour-changes-that-do-not-break-the-build" aria-label="Link to this section">#</a></h2>
+<p>These landed in 0.82 and still catch people upgrading to 0.87. Nothing fails to compile; the app behaves differently.</p>
+<div class="table-wrap"><table><thead><tr><th>Change</th><th>What you will notice</th></tr></thead><tbody><tr><td>Uncaught promise rejections now raise <code>console.error</code></td><td>Errors that were silently swallowed for years suddenly appear in your logs and in LogBox. They were always there.</td></tr><tr><td>Bridgeless by default; the Bridge is removed</td><td>Any code holding an <code>RCTBridge</code>, or a library that expects one, fails at runtime rather than at build time.</td></tr><tr><td><code>newArchEnabled</code> / <code>RCT_NEW_ARCH_ENABLED</code> are ignored</td><td>Setting either changes nothing. A &quot;fix&quot; that sets them is not a fix.</td></tr><tr><td>Android Gradle Plugin 9.0.0</td><td>New DSL and built-in Kotlin; see the opt-outs below.</td></tr><tr><td>C++ backward-compatibility headers removed</td><td>Native code must include the real header, for example <code>#include &lt;react/bridging/LongLivedObject.h&gt;</code>.</td></tr><tr><td><code>ReactNativeFeatureFlags</code> is private API</td><td>Do not depend on it; it can change without notice.</td></tr><tr><td>Metro 0.87 source maps</td><td>About twice as fast to generate, roughly half the memory. Nothing to do.</td></tr></tbody></table></div>
+<p>Android Gradle Plugin 9 opt-outs, recommended while the ecosystem catches up:</p>
+<figure class="code" data-lang="properties">
+<figcaption><span class="code-label">android/gradle.properties</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-properties"><span class="tk-c"># Opt out of built-in Kotlin and the new DSL that ship with AGP 9.</span>
+<span class="tk-c"># These opt-outs are removed starting with AGP 10.x, so this is a deadline, not a setting.</span>
+<span class="tk-a">android.builtInKotlin</span><span class="tk-p">=</span><span class="tk-s">false</span>
+<span class="tk-a">android.newDsl</span><span class="tk-p">=</span><span class="tk-s">false</span></code></pre>
+</figure>
+<hr>
+<h2 id="7-the-upgrade-checklist">7. The upgrade checklist<a class="anchor" href="#7-the-upgrade-checklist" aria-label="Link to this section">#</a></h2>
+<p>Copy this into your upgrade ticket.</p>
+<figure class="code" data-lang="text">
+<figcaption><span class="code-label">text</span><button class="copy" type="button" aria-label="Copy code to clipboard"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" d="M5.5 5.5v-3h8v8h-3"/><rect x="2.5" y="5.5" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Copy</span></button></figcaption>
+<pre><code class="lang-text">TYPES (tsc --noEmit finds these)
+[ ] No imports from react-native/Libraries/
+[ ] No imports from react-native/src/private/
+[ ] No *Properties type aliases  -&gt; *Props
+[ ] No NativeMethods / NativeMethodsMixin  -&gt; HostInstance or a *Instance type
+[ ] Refs typed with per-component instance types
+
+JAVASCRIPT
+[ ] No InteractionManager  -&gt; requestIdleCallback global
+[ ] No &lt;Modal animated&gt;  -&gt; animationType
+[ ] No StatusBar backgroundColor / translucent / networkActivityIndicatorVisible
+[ ] No StatusBar.setBackgroundColor / setTranslucent / setNetworkActivityIndicatorVisible
+[ ] keyboardShouldPersistTaps is a string, not a boolean
+[ ] No comparison of useColorScheme() against a third value; handle null
+[ ] No useTurboModules flag, no ReactNativeFeatureFlags use
+[ ] No NativeDialogManagerAndroid, no Touchable root import
+[ ] No rn-get-polyfills  -&gt; @react-native/js-polyfills
+[ ] No @react-native/core-cli-utils
+[ ] No InitializeCore import  -&gt; react-native/setup-env
+[ ] No @react-native/assets-registry  -&gt; AssetRegistry from react-native
+[ ] No ImageBackground  -&gt; View + absolutely positioned Image
+[ ] No Appearance.setColorScheme with the old reset value  -&gt; 'auto'
+[ ] No DrawerLayoutAndroid  -&gt; react-native-drawer-layout
+
+BUILD CONFIG
+[ ] metro.config is .js/.mjs/.mts, not YAML
+[ ] No .es6 source files
+[ ] android/gradle.properties has the AGP 9 opt-outs (or the project builds without them)
+[ ] Node &gt;= 22.13.0, Kotlin &gt;= 2.0, compileSdk 37, minCompileSdk 34
+
+NATIVE — ANDROID
+[ ] No UIBlock / addUIBlock / prependUIBlock  -&gt; UIManagerListener or View Commands
+[ ] DefaultReactActivityDelegate constructed without arch flags
+
+NATIVE — iOS  (requires macOS to verify)
+[ ] #import &lt;React/RCTAppDelegate.h&gt;, not the bare form
+[ ] No TimingModule, RCTTurboModuleEnabled(), RCTEnableTurboModule()
+[ ] C++ includes use real header paths
+
+RUNTIME
+[ ] App launches on both platforms
+[ ] New console.error output from previously silent promise rejections triaged
+[ ] Every native dependency verified for Fabric / TurboModule support</code></pre>
+</figure>
+<h2 id="common-mistakes">Common mistakes<a class="anchor" href="#common-mistakes" aria-label="Link to this section">#</a></h2>
+<ul><li><p><strong>Trusting a green build.</strong> Wrong: shipping because Gradle and Xcode succeeded. Right: work the runtime half of the checklist too. <code>useColorScheme</code> comparisons, promise rejections and removed <code>StatusBar</code> props do not fail a build — they fail on a device.</p></li><li><p><strong>Adding the legacy deep-import opt-out and calling the migration done.</strong> Wrong: <code>customConditions: [&quot;react-native&quot;, &quot;react-native-legacy-deep-imports&quot;]</code> as a permanent setting. Right: use it to unblock a build, then remove it. It works only through 0.88 and is intended for removal in 0.89. See <a href="strict-typescript-api.html">Migrating to the Strict TypeScript API</a>.</p></li><li><p><strong>Replacing <code>translucent</code> with a library that re-adds it.</strong> Wrong: hunting for a package that restores the removed prop. Right: adopt edge-to-edge and draw your own inset background. The prop was removed because the platform model changed, not because it was unpopular.</p></li><li><p><strong>Swapping boolean <code>keyboardShouldPersistTaps={true}</code> for <code>&quot;handled&quot;</code> without testing.</strong> Wrong: assuming they are the same. Right: <code>true</code> mapped to <code>&quot;always&quot;</code>. <code>&quot;handled&quot;</code> is usually better, but it is a behaviour change — verify that taps on your form controls still register.</p></li><li><p><strong>Setting the architecture flags to roll something back.</strong> Wrong: <code>newArchEnabled=false</code> when a library misbehaves. Right: fix or replace the library. The flags have been ignored since 0.82; setting them changes nothing and wastes the afternoon.</p></li><li><p><strong>Deleting <code>ImageBackground</code> usage without <code>overflow: 'hidden'</code>.</strong> Wrong: a <code>View</code> plus <code>absoluteFill</code> image with rounded corners and no clipping. Right: add <code>overflow: 'hidden'</code> to the container. The deprecated component clipped for you.</p></li><li><p><strong>Grepping only <code>src/</code>.</strong> Wrong: assuming your own code is the whole problem. Right: check <code>node_modules</code> for libraries doing deep imports, and check your own Metro, Babel, Jest and build scripts.</p></li></ul>
+<h2 id="related-topics">Related topics<a class="anchor" href="#related-topics" aria-label="Link to this section">#</a></h2>
+<ul><li><a href="strict-typescript-api.html">Migrating to the Strict TypeScript API</a> — the mechanism behind section 1 and the migration order for a large codebase.</li><li><a href="new-architecture-migration.html">New Architecture Migration</a> — for projects still on 0.81 or earlier.</li><li><a href="cocoapods-to-spm.html">CocoaPods to Swift Package Manager</a> — the experimental iOS build path and the header change.</li><li><a href="native-dependency-compatibility.html">Native Dependency Compatibility</a> — checking whether your libraries survive the upgrade.</li><li><a href="upgrade-helper-workflow.html">The Upgrade Helper Workflow</a> — the process this checklist plugs into.</li><li><a href="../core-concepts/new-architecture.html">The New Architecture</a> — why so much of this changed at once.</li><li><a href="../reference/troubleshooting.html">Troubleshooting</a> — the specific errors these removals produce.</li></ul>
+</article>
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="../migration/upgrade-helper-workflow.html"><span class="dir">Previous</span><span>The Upgrade Helper Workflow</span></a>
+<a class="next" href="../migration/strict-typescript-api.html"><span class="dir">Next</span><span>Migrating to the Strict TypeScript API</span></a>
+</nav>
+</main>
+<aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="lvl-2"><a href="#how-to-use-this-page">How to use this page</a></li><li class="lvl-2"><a href="#1-removed-type-level-and-import-level">1. Removed — type-level and import-level</a></li><li class="lvl-3"><a href="#11-deep-imports-into-react-nativelibraries-and-react-nativesrcprivate">1.1 Deep imports into react-native/Libraries/ and react-native/src/private/</a></li><li class="lvl-3"><a href="#12-properties-type-aliases">1.2 *Properties type aliases</a></li><li class="lvl-3"><a href="#13-nativemethods-and-nativemethodsmixin">1.3 NativeMethods and NativeMethodsMixin</a></li><li class="lvl-2"><a href="#2-removed-javascript-apis">2. Removed — JavaScript APIs</a></li><li class="lvl-3"><a href="#21-interactionmanager">2.1 InteractionManager</a></li><li class="lvl-3"><a href="#22-modals-animated-prop">2.2 Modal's animated prop</a></li><li class="lvl-3"><a href="#23-statusbar-props-backgroundcolor-translucent-networkactivityindicatorvisible">2.3 StatusBar props backgroundColor, translucent, networkActivityIndicatorVisible</a></li><li class="lvl-3"><a href="#24-boolean-keyboardshouldpersisttaps-on-scrollview">2.4 Boolean keyboardShouldPersistTaps on ScrollView</a></li><li class="lvl-3"><a href="#25-usecolorscheme-no-longer-returns-an-unspecified-string">2.5 useColorScheme() no longer returns an &quot;unspecified&quot; string</a></li><li class="lvl-3"><a href="#26-the-useturbomodules-feature-flag">2.6 The useTurboModules feature flag</a></li><li class="lvl-3"><a href="#27-nativedialogmanagerandroid-export-and-the-undocumented-touchable-root-export">2.7 NativeDialogManagerAndroid export, and the undocumented Touchable root export</a></li><li class="lvl-3"><a href="#28-react-nativern-get-polyfills">2.8 react-native/rn-get-polyfills</a></li><li class="lvl-3"><a href="#29-react-nativecore-cli-utils">2.9 @react-native/core-cli-utils</a></li><li class="lvl-3"><a href="#210-standalone-react-devtools-websocket-support">2.10 Standalone react-devtools WebSocket support</a></li><li class="lvl-3"><a href="#211-metro-yaml-config-files-and-es6-extensions">2.11 Metro: YAML config files and .es6 extensions</a></li><li class="lvl-2"><a href="#3-removed-android-native">3. Removed — Android native</a></li><li class="lvl-3"><a href="#31-uiblock-and-uimanagermoduleadduiblock-prependuiblock">3.1 UIBlock and UIManagerModule.addUIBlock / prependUIBlock</a></li><li class="lvl-3"><a href="#32-new-architecture-flag-constructors-on-defaultreactactivitydelegate">3.2 New-architecture-flag constructors on DefaultReactActivityDelegate</a></li><li class="lvl-2"><a href="#4-removed-ios-native">4. Removed — iOS native</a></li><li class="lvl-3"><a href="#41-timingmodule-rctturbomoduleenabled-rctenableturbomodule">4.1 TimingModule, RCTTurboModuleEnabled(), RCTEnableTurboModule()</a></li><li class="lvl-3"><a href="#42-the-rctappdelegateh-import-path">4.2 The RCTAppDelegate.h import path</a></li><li class="lvl-2"><a href="#5-deprecated-still-present-do-not-build-on-them">5. Deprecated — still present, do not build on them</a></li><li class="lvl-3"><a href="#51-react-nativelibrariescoreinitializecore">5.1 react-native/Libraries/Core/InitializeCore</a></li><li class="lvl-3"><a href="#52-react-nativeassets-registry">5.2 @react-native/assets-registry</a></li><li class="lvl-3"><a href="#53-imagebackground">5.3 ImageBackground</a></li><li class="lvl-3"><a href="#54-the-nativemethods-interface">5.4 The NativeMethods interface</a></li><li class="lvl-3"><a href="#55-appearancesetcolorscheme-with-an-unspecified-argument">5.5 Appearance.setColorScheme with an &quot;unspecified&quot; argument</a></li><li class="lvl-3"><a href="#56-drawerlayoutandroid">5.6 DrawerLayoutAndroid</a></li><li class="lvl-3"><a href="#57-ios-timingmodule-rctturbomoduleenabled-rctenableturbomodule">5.7 iOS: TimingModule, RCTTurboModuleEnabled(), RCTEnableTurboModule()</a></li><li class="lvl-2"><a href="#6-behaviour-changes-that-do-not-break-the-build">6. Behaviour changes that do not break the build</a></li><li class="lvl-2"><a href="#7-the-upgrade-checklist">7. The upgrade checklist</a></li><li class="lvl-2"><a href="#common-mistakes">Common mistakes</a></li><li class="lvl-2"><a href="#related-topics">Related topics</a></li></ul></aside>
+</div>
+<footer class="footer"><div class="footer-inner">
+  <span>React Native 0.87.1 · Community CLI 20.2.0 · React 19.2.3 · verified 2026-09-12</span>
+  <span><a href="../index.html">Home</a> · <a href="../reference/troubleshooting.html">Troubleshooting</a> · <a href="../reference/cheat-sheet.html">Cheat sheet</a></span>
+</div></footer>
+<div id="search-overlay" class="search-overlay" hidden role="dialog" aria-modal="true" aria-label="Search">
+  <div class="search-box">
+    <input id="search-input" type="search" placeholder="Search pages, headings and text…" autocomplete="off" spellcheck="false" aria-label="Search query">
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

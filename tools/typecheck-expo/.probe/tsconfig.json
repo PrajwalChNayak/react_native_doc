@@ -1,0 +1,1 @@
+{"extends":"expo/tsconfig.base","compilerOptions":{"noEmit":true,"skipLibCheck":true,"strict":true,"types":[],"isolatedModules":false},"include":["blocks"]}
