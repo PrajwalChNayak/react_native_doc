@@ -66,8 +66,8 @@
   --bar-h: 56px;
   --prose-w: 41rem;      /* measured 656px = 76ch in the browser */
   --toc-w: 13rem;
-  --rail-gap: 2.25rem;
-  --gutter: 1.5rem;
+  --rail-gap: 0;
+  --gutter: 1rem;
 
   --radius: 6px;
   --radius-sm: 4px;
@@ -432,19 +432,25 @@ a:hover {
    The prose column and the TOC rail are centred together as one unit, so
    there is no wide empty margin on either side.
 */
+/*
+   Full-width layout: a small left gutter, the content column stretching right
+   up to the "On this page" rail, and the rail flush against the right edge.
+   No centring, no empty space on the right, no gap between content and rail.
+*/
 .shell {
-  max-width: calc(var(--prose-w) + var(--rail-gap) + var(--toc-w) + 2 * var(--gutter));
-  margin: 0 auto;
-  padding: 0 var(--gutter);
+  max-width: none;
+  margin: 0;
+  padding: 0 0 0 var(--gutter);
   display: grid;
-  grid-template-columns: minmax(0, var(--prose-w)) var(--toc-w);
-  column-gap: var(--rail-gap);
+  grid-template-columns: minmax(0, 1fr) var(--toc-w);
+  column-gap: 0;
   align-items: start;
 }
 
 .main {
   min-width: 0;
-  padding: 1.75rem 0 4rem;
+  /* A hairline of right padding so text never touches the rail's divider. */
+  padding: 1.75rem 0.75rem 4rem 0;
 }
 
 /* ---------------------------------------------------------- breadcrumbs */
@@ -1017,7 +1023,8 @@ figure.code code {
   top: calc(var(--bar-h) + 1.75rem);
   max-height: calc(100vh - var(--bar-h) - 3rem);
   overflow-y: auto;
-  padding: 1.75rem 0 2rem;
+  /* Right padding keeps rail text off the viewport edge now the rail is flush right. */
+  padding: 1.75rem 0.75rem 2rem 0;
   font-size: 0.8rem;
   line-height: 1.45;
 }
@@ -1077,8 +1084,8 @@ figure.code code {
 }
 
 .footer-inner {
-  max-width: calc(var(--prose-w) + var(--rail-gap) + var(--toc-w) + 2 * var(--gutter));
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
@@ -1207,7 +1214,7 @@ figure.code code {
   margin: 0 0 1rem;
   font-size: 1.0625rem;
   color: var(--text-muted);
-  max-width: 42rem;
+  max-width: none;
   text-wrap: pretty;
 }
 
@@ -1245,21 +1252,10 @@ figure.code code {
    to the reading measure would push it to eight rows, so this one page gets a
    wider shell while its actual sentences stay at the reading width.
 */
-body.home .shell {
-  max-width: calc(58rem + var(--rail-gap) + var(--toc-w) + 2 * var(--gutter));
-  grid-template-columns: minmax(0, 58rem) var(--toc-w);
-}
-
+/* The home page uses the same full-width layout as every other page. */
 body.home .home-hero p,
 body.home .prose > p {
-  max-width: 42rem;
-}
-
-@media (max-width: 1180px) {
-  body.home .shell {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: calc(58rem + 2 * var(--gutter));
-  }
+  max-width: none;
 }
 
 .sec-grid {
@@ -1306,17 +1302,20 @@ body.home .prose > p {
 /* ------------------------------------------------------------- 1180px */
 
 @media (max-width: 1180px) {
+  /* No rail below 1180px, so the text needs a matching gutter on the right
+     instead of running into the viewport edge. */
   .shell {
     grid-template-columns: minmax(0, 1fr);
-    max-width: calc(var(--prose-w) + 2 * var(--gutter));
+    max-width: none;
+    padding: 0 var(--gutter);
+  }
+
+  .main {
+    padding-right: 0;
   }
 
   .toc {
     display: none;
-  }
-
-  .footer-inner {
-    max-width: calc(var(--prose-w) + 2 * var(--gutter));
   }
 }
 
