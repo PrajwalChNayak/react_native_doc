@@ -67,7 +67,7 @@
   --prose-w: 41rem;      /* measured 656px = 76ch in the browser */
   --toc-w: 13rem;
   --rail-gap: 0;
-  --gutter: 1rem;
+  --gutter: 2.25rem;
 
   --radius: 6px;
   --radius-sm: 4px;
@@ -1323,7 +1323,7 @@ body.home .prose > p {
 
 @media (max-width: 1040px) {
   :root {
-    --gutter: 1rem;
+    --gutter: 1.5rem;
   }
 
   .navmenus {
@@ -1417,7 +1417,7 @@ body.home .prose > p {
 
 @media (max-width: 480px) {
   :root {
-    --gutter: 0.875rem;
+    --gutter: 1.125rem;
   }
 
   body {
